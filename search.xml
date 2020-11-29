@@ -1,217 +1,511 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-  
-    
-    <entry>
-      <title>pid笔记</title>
-      <link href="2020/11/28/pid%E7%AC%94%E8%AE%B0/"/>
-      <url>2020/11/28/pid%E7%AC%94%E8%AE%B0/</url>
-      
-        <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>今天智能车培训听完綦佬讲解pid体验良好，决定做下记录，顺便自己也正儿八经写篇关于pid的笔记。</p><a id="more"></a><h4 id="一、PID基础"><a href="#一、PID基础" class="headerlink" title="一、PID基础"></a>一、PID基础</h4><p><strong>1.1 控制系统的框图</strong></p><ul><li>执行器</li><li>传感器</li><li>控制器<br><img src="/2020/11/28/pid%E7%AC%94%E8%AE%B0/1.png" alt="控制系统的框图"></li></ul><p><strong>1.2 控制器的设计</strong><br><strong><em>1.2.1 on-off控制</em></strong><br>&emsp;&emsp;比如我们举个烧水壶加热到60℃的例子，仅仅控制电热丝的通断可实现on-off控制，即当温度小于60℃时通，大于60℃时断，这样便可实现简单的控制。<br>&emsp;&emsp;这样的设计虽然简单但是这样存在一定的缺陷：频繁开关会损伤执行器的寿命。<br>*<strong>1.2.2 带死区的on-off控制***<br>&emsp;&emsp;即在1.2.1的基础上，假如并不需要控制水温60℃，而是存在一定的死区，如50℃-70℃都可以，则此时温度小于50℃时通，大于70℃时断。<br>&emsp;&emsp;这样减少了开关通断的频率从而提高了使用寿命。<br>*</strong>1.2.3 相对连续的控制器–P控制(Proportion)***<br>&emsp;&emsp;看了上述的两种控制器，我们不由得思考是否存在一种控制器能同时相对精准的控制温度，同时又能减少开关的频繁通断。<br>&emsp;&emsp;由此我们引出了相对连续的控制器。与之相应的也应该有相对连续的传感器。</p><p>&emsp;&emsp;我们记当前值$Z$与预期值$X$的偏差为$error$，即$$error=X-Z$$</p><p>于是输出值$out=K_c<em>error$，$K_c$为比例系数<br>当$error$减小时，$out$也随之减小<br>通过error值我们便可以用占空比来得到相对连续的控制量。<br>那么这样是否存在问题呢？<br>&emsp;&emsp;我们可以看到当Z与X相等时，error值则为0，即停止输出，当Z小于X时再输出。从一个长的时间跨度来看输出的平均值便小于了预期值，即存在稳态误差。<br>&emsp;&emsp;另外，我们还要注意$K_c$值不能设的太大，否则一个很小的误差便会引起系统很大的改变，于是误差便会越来越大(发散系统)。<br>**</em>1.2.4 P-I控制 (比例-积分) (Proportion-Integration)***<br>为减小稳态误差，我们引入了积分量<br>$$out=K_c(e(t)+\frac{1}{T_i}\int e(t)dt)$$<br>其中$\frac{1}{T_i}$为积分时间常数，$\frac{1}{T_i}\int e(t)dt$为耗散<br>这样又是否已经可以很好的控制系统了呢？<br>我们思考这样两种情况：<br><img src="/2020/11/28/pid%E7%AC%94%E8%AE%B0/2.png" alt="D的引入"></p><p>可以看到左图的当前值是趋向于预期值的，而右图的当前值是远离期望值的，对于P-I控制来说他们输出的out值却是一样的，对于这样的情况这样的控制策略显然并不好。<br>**<em>1.2.4 P-I-D控制 (比例-积分-微分) (Proportion-Integration-Derivation)**</em><br>于是我们引入微分项<br>$$out=K_c\Big(e(t)+\frac{1}{T_i}\int e(t)dt+T_d\frac{de(t)}{dt}\Big)$$<br>这里当$K_c$变化时，PID三项均会变化，于是我们引入一种更实用的写法<br>$$out=K_pe(t)+K_i\int e(t)dt+K_d\frac{de(t)}{dt}$$<br>只需改变$K_p$、$K_i$、$K_d$即可分别控制PID三项</p><h4 id="二、PID调参"><a href="#二、PID调参" class="headerlink" title="二、PID调参"></a>二、PID调参</h4><h4 id="三、PID理论证明"><a href="#三、PID理论证明" class="headerlink" title="三、PID理论证明"></a>三、PID理论证明</h4><h4 id="四、待定"><a href="#四、待定" class="headerlink" title="四、待定"></a>四、待定</h4><p><strong>咕咕咕咕咕咕咕咕</strong></p>]]></content>
-      
-      
+<search>
+  <entry>
+    <title>Latex笔记</title>
+    <url>/2020/05/29/Latex%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h3 id="零、关于Latex、Mathjax、Talex"><a href="#零、关于Latex、Mathjax、Talex" class="headerlink" title="零、关于Latex、Mathjax、Talex"></a>零、关于Latex、Mathjax、Talex</h3><ul>
+<li><p>LaTeX是一种基于ΤΕΧ的排版系统，由美国计算机学家莱斯利·兰伯特（Leslie Lamport）在20世纪80年代初期开发，利用这种格式，即使使用者没有排版和程序设计的知识也可以充分发挥由TeX所提供的强大功能，能在几天，甚至几小时内生成很多具有书籍质量的印刷品。对于生成复杂表格和数学公式，这一点表现得尤为突出。因此它非常适用于生成高印刷质量的科技和数学类文档。</p>
+<a id="more"></a></li>
+<li><p>MathJax是一个显示网络上数学公式的开源JavaScript引擎库，它可以在所有浏览器上面工作，其中就支持LaTeX，MathML和AsciiMath 符号，里面的数字会被MathJax使用JavaScript引擎解析成HTML，SVG或者是MathML 方程式，然后在现代的浏览器里面显示。 它的设计目标是利用最新的web技术，构建一个支持math的web平台。支持主要的浏览器和操作系统,包括那些移动设备</p>
+</li>
+<li><p>Talex也是一个web数学公式渲染器。可惜hexo对Talex的支持似乎并不很友好。<br>Talex优点如下：<br>快速：并发渲染，无需重排页面。根据这个测试，性能绝对秒杀MathJax。<br>渲染效果好：采用TeX语法，渲染效果达到印刷出版级别。<br>无依赖：不依赖其它库。<br>支持服务器端渲染：例如，服务器端的Node.js程序调用KaTeX，把渲染好的HTML片段直接发送给客户端。</p>
+</li>
+</ul>
+<hr>
+<p><em>下面介绍KaTex/LaTex用法</em></p>
+<h3 id="一、基本操作"><a href="#一、基本操作" class="headerlink" title="一、基本操作"></a>一、基本操作</h3><h4 id="插入公式"><a href="#插入公式" class="headerlink" title="插入公式"></a>插入公式</h4><ul>
+<li><strong>行中公式</strong><br><code>$在这中间加公式$</code><br>效果：$hello world$</li>
+<li><strong>独立公式</strong><br><code>$$在这中间加公式$$</code><br>效果：$$hello world$$<h4 id="的使用"><a href="#的使用" class="headerlink" title="{}的使用"></a>{}的使用</h4></li>
+<li><code>$&#123;xyx&#125;^&#123;1+2+3&#125;$</code><br>效果：${xyx}^{1+2+3}$<br>只有一个字符时可不写{}</li>
+<li><code>**\text&#123;&#125;</code>可用来划出一个文字区域，然后用<code>\operatorname&#123;&#125;</code>产生公式操作**<br>如：<code>$\operatorname&#123;Asin&#125;\text&#123; (ωx+μ) &#125;$</code><br>效果：$\operatorname{Asin}\text{ (ωx+μ) }$<br>而在\text{}中还可以再插入别的公式<br>如: <code>$$f(n)=n^n \quad \text&#123;n$\in N^\ast$&#125;$$</code><br>效果：$$f(n)=n^n \quad \text{n$\in N^\ast$}$$</li>
+</ul>
+<h3 id="二、“花里胡哨”的操作"><a href="#二、“花里胡哨”的操作" class="headerlink" title="二、“花里胡哨”的操作"></a>二、“花里胡哨”的操作</h3><h4 id="1-上下标"><a href="#1-上下标" class="headerlink" title="1. 上下标"></a>1. 上下标</h4><p><code>^</code>表示上标，<code>_</code>表示下标</p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>$C^&#123;2^2&#125;_&#123;n+1&#125;$</code></td>
+<td>$C^{2^2}_{n+1}$</td>
+</tr>
+<tr>
+<td><code>$x^&#123;2^2_2&#125;_2$</code></td>
+<td>$x^{2^2_2}_2$</td>
+</tr>
+<tr>
+<td><code>$&#123;^1_2&#125;\bigotimes &#123;^3_4&#125;$</code></td>
+<td>${^1_2}\bigotimes {^3_4}$</td>
+</tr>
+<tr>
+<td><code>$^&#123;18&#125; _8 O ^&#123;-2&#125; _2$</code></td>
+<td>$^{18} _8 O ^{-2} _2$</td>
+</tr>
+</tbody></table>
+<h4 id="2-字符变大变小"><a href="#2-字符变大变小" class="headerlink" title="2. 字符变大变小"></a>2. 字符变大变小</h4><p>在符号前插入<code>\large</code>或<code>\small</code>命令即可</p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>$\tiny x$</code></td>
+<td>$\tiny x$</td>
+</tr>
+<tr>
+<td><code>$\scriptsize x$</code></td>
+<td>$\scriptsize x$</td>
+</tr>
+<tr>
+<td><code>$\footnotesize x$</code></td>
+<td>$\footnotesize x$</td>
+</tr>
+<tr>
+<td><code>$\small x$</code></td>
+<td>$\small x$</td>
+</tr>
+<tr>
+<td><code>$\normalsize x$</code></td>
+<td>$\normalsize x$</td>
+</tr>
+<tr>
+<td><code>$x$</code></td>
+<td>$x$</td>
+</tr>
+<tr>
+<td><code>$\large x$</code></td>
+<td>$\large x$</td>
+</tr>
+<tr>
+<td><code>$\Large x$</code></td>
+<td>$\Large x$</td>
+</tr>
+<tr>
+<td><code>$\LARGE x$</code></td>
+<td>$\LARGE x$</td>
+</tr>
+<tr>
+<td><code>$\huge x$</code></td>
+<td>$\huge x$</td>
+</tr>
+<tr>
+<td><code>$\Huge x$</code></td>
+<td>$\Huge x$</td>
+</tr>
+<tr>
+<td><code>$\small\ &#123;aa&#125;a \large &#123;a&#125;aa$</code></td>
+<td>$\small\ {aa}a \large {a}aa$</td>
+</tr>
+<tr>
+<td><code>$\boldsymbol&#123;\alpha 12bcEF&#125;12bcEF$</code></td>
+<td>$\boldsymbol{\alpha 12bcEF}12bcEF$</td>
+</tr>
+</tbody></table>
+<h4 id="3-字体"><a href="#3-字体" class="headerlink" title="3. 字体"></a>3. 字体</h4><table>
+<thead>
+<tr>
+<th>代码</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>$\rm &#123;罗马体abc123&#125;$</code></td>
+<td>$\rm {罗马体abc123}$</td>
+</tr>
+<tr>
+<td><code>$it &#123;意大利斜体abcde 123&#125;$</code></td>
+<td>$\it {意大利斜体abc123}$</td>
+</tr>
+<tr>
+<td><code>$\bf &#123;粗体abc123&#125;$</code></td>
+<td>$\bf {粗体abc123}$</td>
+</tr>
+<tr>
+<td><code>$\sf &#123;等线体abc123&#125;$</code></td>
+<td>$\sf {等线体abc123}$</td>
+</tr>
+<tr>
+<td><code>$\tt &#123;打印体abc123&#125;$</code></td>
+<td>$\tt {打印体abc123}$</td>
+</tr>
+<tr>
+<td><code>$\frak &#123;旧德式字体abc123&#125;$</code></td>
+<td>$\frak {旧德式字体abc123}$</td>
+</tr>
+<tr>
+<td><code>$Bbb &#123;黑板粗体abc123&#125;$</code></td>
+<td>$Bbb {黑板粗体abc123}$</td>
+</tr>
+<tr>
+<td><code>$\mathcal &#123;手写体abc123&#125;$</code></td>
+<td>$\mathcal {手写体abc123}$</td>
+</tr>
+<tr>
+<td><code>$\bold &#123;abc123&#125;$</code></td>
+<td>$\bold {abc123}$</td>
+</tr>
+<tr>
+<td><code>$\bm &#123;abc123&#125;$</code></td>
+<td>$\bm {abc123}$</td>
+</tr>
+<tr>
+<td><code>$\mathscr &#123;abc123&#125;$</code></td>
+<td>$\mathscr {abc123}$</td>
+</tr>
+</tbody></table>
+<h4 id="4-输入换行和空格"><a href="#4-输入换行和空格" class="headerlink" title="4. 输入换行和空格"></a>4. 输入换行和空格</h4><table>
+<thead>
+<tr>
+<th>代码</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>$用\space或~或 \ 来空格$</code></td>
+<td>$用\space或~或 \ 来空格$</td>
+</tr>
+<tr>
+<td><code>$用\newline或者 \\ 来换行$</code></td>
+<td>$用\newline或者 \ 来换行$</td>
+</tr>
+</tbody></table>
+<h4 id="5-输入括号和分隔符"><a href="#5-输入括号和分隔符" class="headerlink" title="5.输入括号和分隔符"></a>5.输入括号和分隔符</h4><table>
+<thead>
+<tr>
+<th>代码</th>
+<th>效果</th>
+<th>代码</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>$\lfloor &#123;a&#125; \rfloor$</code></td>
+<td>$\lfloor {a} \rfloor$</td>
+<td><code>$\lceil &#123;b&#125; \rceil$</code></td>
+<td>$\lceil {b} \rceil$</td>
+</tr>
+<tr>
+<td><code>$\lbrace &#123;c&#125; \rbrace$</code></td>
+<td>$\lbrace {c} \rbrace$</td>
+<td><code>$\&#123; &#123;d&#125; \&#125;$</code></td>
+<td>${ {d} }$</td>
+</tr>
+<tr>
+<td><code>$\langle &#123;e&#125; \rangle$</code></td>
+<td>$\langle {e} \rangle$</td>
+<td><code>$\left( &#123;f&#125; \right)$</code></td>
+<td>$\left( {f} \right)$</td>
+</tr>
+<tr>
+<td><code>$\left[ &#123;g&#125; \right]$</code></td>
+<td>$\left[ {g} \right]$</td>
+<td><code>$\langle &#123;h&#125; \rangle$</code></td>
+<td>$\langle {h} \rangle$</td>
+</tr>
+<tr>
+<td><code>$/ &#123;i&#125; \backslash$</code></td>
+<td>$/ {i} \backslash$</td>
+<td><code>$\lmoustache &#123;j&#125; \rmoustache$</code></td>
+<td>$\lmoustache {j} \rmoustache$</td>
+</tr>
+<tr>
+<td><code>$\ulcorner &#123;k&#125; \urcorner$</code></td>
+<td>$\ulcorner {k} \urcorner$</td>
+<td><code>$\llcorner &#123;l&#125; \lrcorner$</code></td>
+<td>$\llcorner {l} \lrcorner$</td>
+</tr>
+<tr>
+<td><code>$\vert &#123;m&#125; \vert$</code></td>
+<td>$\vert {m} \vert$</td>
+<td><code>$\Vert &#123;n&#125; \Vert$</code></td>
+<td>$\Vert {n} \Vert$</td>
+</tr>
+<tr>
+<td><code>$\lgroup &#123;o&#125; \rgroup$</code></td>
+<td>$\lgroup {o} \rgroup$</td>
+<td><code>$\lt &#123;p&#125; \gt$</code></td>
+<td>$\lt {p} \gt$</td>
+</tr>
+<tr>
+<td><code>$\lang &#123;q&#125; \rang$</code></td>
+<td>$\lang {q} \rang$</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><code>$| \frac&#123;a&#125;&#123;b&#125; |$</code><br>效果：$| \frac{a}{b} |$<br><code>$\| \frac&#123;a&#125;&#123;b&#125; \|$</code><br>效果：$| \frac{a}{b} |$</p>
+<p>此外，可用<code>\big \Big \bigg \Bigg</code>控制括号大小，比如</p>
+<figure class="highlight latex"><figcaption><span>&#123;.line-numbers&#125;</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br><span class="line"><span class="keyword">\Bigg</span> ( </span><br><span class="line">	<span class="keyword">\bigg</span> [ </span><br><span class="line">		<span class="keyword">\Big</span> <span class="keyword">\&#123;</span> </span><br><span class="line">			<span class="keyword">\big</span> <span class="keyword">\langle</span> </span><br><span class="line">				<span class="keyword">\|</span> </span><br><span class="line">					<span class="keyword">\frac</span>&#123;a&#125;&#123;b&#125; </span><br><span class="line">				<span class="keyword">\|</span> </span><br><span class="line">			<span class="keyword">\big</span> <span class="keyword">\rangle</span></span><br><span class="line">		<span class="keyword">\Big</span> <span class="keyword">\&#125;</span></span><br><span class="line">	<span class="keyword">\bigg</span> ] </span><br><span class="line"><span class="keyword">\Bigg</span> )</span><br><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br></pre></td></tr></table></figure>
+<p>得到：<br>$$<br>\Bigg (<br>    \bigg [<br>        \Big {<br>            \big \langle<br>                |<br>                    \frac{a}{b}<br>                |<br>            \big \rangle<br>        \Big }<br>    \bigg ]<br>\Bigg )<br>$$<br>用前面2.的方法也可<br>另外，当要在不同行显示对应括号时，可以在每一行对应处使用 \left. 或 \right. 来放一个”影子”括号：<code>$$a = \left(1 + 2 + 3 + \cdots\right. \\ \left. n - 2 + n - 1 + n\right.)$$</code><br>得到：<br>$$a = \left(1 + 2 + 3 + \cdots\right. \ \left. n - 2 + n - 1 + n\right.)$$<br>此外，\left(\right)等会自动匹配括号大小,如<br><code>$$\large a_\text&#123;向下&#125;=g+(\frac&#123;\frac&#123;G_&#123;总&#125;&#125;&#123;g&#125;&#125;&#123;\frac&#123;p_1&#125;&#123;v_1&#125;+m_2&#125;)$$</code><br><code>$$\large a_\text&#123;向下&#125;=g+\left(\frac&#123;\frac&#123;G_&#123;总&#125;&#125;&#123;g&#125;&#125;&#123;\frac&#123;p_1&#125;&#123;v_1&#125;+m_2&#125;\right)$$</code><br>效果：$$\large a_\text{向下}=g+(\frac{\frac{G_{总}}{g}}{\frac{p_1}{v_1}+m_2})$$<br>$$\large a_\text{向下}=g+\left(\frac{\frac{G_{总}}{g}}{\frac{p_1}{v_1}+m_2}\right)$$</p>
+<p>若要将行内显示的分隔符也变大，可使用\middle命令(必须用\left. \right.),如：<br><code>$        a          | \frac&#123;b&#125;&#123;c&#125; $</code><br><code>$\left. a \middle \| \frac&#123;b&#125;&#123;c&#125; \right.$</code><br>效果：<br>$        a          | \frac{b}{c} $<br>$\left. a \middle | \frac{b}{c} \right.$</p>
+<p>另一类比较不同的括号</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$\tbinom&#123;n&#125;&#123;k&#125;$</span><br><span class="line">$\binom&#123;n&#125;&#123;k&#125;$</span><br><span class="line">$\dbinom&#123;n&#125;&#123;k&#125;$</span><br><span class="line">$&#123;n\brace k&#125;$</span><br><span class="line">$&#123;n\choose k&#125;$</span><br><span class="line">$&#123;n\brack k&#125;$</span><br></pre></td></tr></table></figure>
+<p>对应效果<br>$\tbinom{n}{k}$</p>
+<p>$\binom{n}{k}$</p>
+<p>$\dbinom{n}{k}$</p>
+<p>${n\brace k}$</p>
+<p>${n\choose k}$</p>
+<p>${n\brack k}$</p>
+<h4 id="6-上下标"><a href="#6-上下标" class="headerlink" title="6.上下标"></a>6.上下标</h4>]]></content>
       <categories>
-          
-          <category> 智能车 </category>
-          
+        <category>markdown</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> pid </tag>
-            
-            <tag> 智能车 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>hexo迁移记录</title>
-      <link href="2020/11/20/hexo%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/"/>
-      <url>2020/11/20/hexo%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/</url>
-      
-        <content type="html"><![CDATA[<p>由于前段时间将电脑格式化后hexo本地配置全部丢失，重新配置hexo又比较繁琐，故记录一下这次hexo迁移方法</p><a id="more"></a><ol><li>执行<code>hexo init</code>后从原博客文件中复制替换以下文件(夹)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">_config.yml</span><br><span class="line">source</span><br><span class="line">themes</span><br></pre></td></tr></table></figure>执行<code>hexo generate</code>和<code>hexo server</code>后可本地预览博客</li><li>打开cmd执行<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;Github的注册邮箱地址&quot;</span><br></pre></td></tr></table></figure>一路enter后得到一下信息<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Your public key has been saved in &#x2F;c&#x2F;Users&#x2F;user&#x2F;.ssh&#x2F;id_rsa.pub.</span><br></pre></td></tr></table></figure>找到该文件，打开复制里面的所有内容，然后进入github找到New SSH key ——Title：blog —— Key：输入刚才复制的—— Add SSH key</li><li><code>hexo deploy</code>收工</li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>markdown</tag>
+        <tag>Latex</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git命令</title>
+    <url>/2020/06/28/git%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>仅以readme.txt为例</p>
+<a id="more"></a>
+<h4 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h4><p><code>git init</code> 初始化目录为git仓库<br><code>git add readme.txt</code> 添加文件到暂存区<br><code>git add .</code> 添加所有<br><code>git commit -m &quot;wrote a readme file&quot;</code> 将暂存区中的提交并说明</p>
+<h4 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h4><p><code>git status</code> 查看仓库当前状态<br><code>git diff readme.txt</code> 查看具体修改内容<br><code>git log</code> 查看提交日志<br><code>git log --pretty=oneline</code> 精简信息<br><code>git reset --hard HEAD^</code> 回退到上一个版本（HEAD表示当前版本，HEAD^^表示上上一个版本，HEAD~100表示上100个版本）<br><code>cat readme.txt</code> 查看文件内容</p>
+<p><code>git reset --hard 1094a</code> 回退到版本号为1094a的版本<br><code>git reflog</code> 查看命令历史<br><code>git checkout -- readme.txt</code> 撤回对工作区的修改<br><code>git reset HEAD readme.txt</code> 撤销暂存区的修改重新放回工作区（然后再用上一条指令）</p>
+<p><code>rm readme.txt</code> 删除工作区文件<br><code>git rm readme.txt</code> 删除版本库<br><code>git commit -m &quot;delete readme.txt</code> 提交<br><code>git checkout -- readme.txt</code>从版本库中恢复删除的</p>
+<h4 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h4><p><code>git remote add origin git@github.com:dstx123/仓库名.git</code> 关联远程仓库<br><em>如果出现错误提示：fatal: remote origin already exists.则使用命令 <code>git remote rm origin</code>和 <code>git remote add origin</code></em><br><code>git push -u origin master</code> 第一次把本地库的master分支推送到远程库上（-u加上后也会关联其他分支）<br><code>git push origin master</code> 后来推送</p>
+<p><code>git clone git@github.com:dstx123/仓库名.git</code> 克隆一个本地库</p>
+<h4 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h4><p><code>git checkout -b dev</code> 创建并切换到dev分支<br>这条命令相当于<code>git branch dev</code> 和 <code>git checkout dev</code>两条命令（创建和切换）<br><code>git branch</code> 查看当前分支<br><code>git checkout master</code> 切换到master分支<br><code>git merge dev</code> 将dev分支合并到master分支上<br><code>git branch -d dev</code> 合并完成后删除dev分支<br><code>git switch -c dev</code> 创建并切换到dev分支<br><code>git switch master</code> 切换到master分支<br>分支合并冲突时手动修改<br><code>git log --graph --pretty=oneline --abbrev-commit</code>查看分支合并图</p>
+<p>git合并分支时采用fast forward模式，这种模式看不出曾经做过合并，在删除分支后，会丢失分支信息，故采用<code>git merge --no-ff -m &quot;merge with no-ff&quot; dev</code> 的指令合并并评论</p>
+<p><code>git stash</code> 存储当前工作（使用后工作区干净，可执行其他分支操作）<br><code>git stash list</code> 查看刚刚的工作现场<br><code>git stash pop</code>  恢复并删除刚刚存的stash内容<br><code>git stash apply</code> 恢复但不删除刚刚的stash内容<br>dev分支是早期从mster上分出来的，所以如果刚刚对master分支修改了，此时也需要对dev分支修改。<br><code>git cherry-pick 4c805e2</code> 用之前修改的版本号直接复制master的修改到dev<br><code>git branch -D feature</code>删除还未合并的feature分支<br><code>git rebase</code> 把分叉的历史提交记录整理成一条直线</p>
+<h4 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a>标签管理</h4><p><code>git checkout master</code> 先切换到要打标签的分支上<br><code>git tag v1.0</code>打上一个v1.0的标签<br><code>git tag</code> 查看所有标签（标签不是按时间顺序的，是按字母顺序）<br><code>git tag v0.9 f52c633</code> 打到指定版本号的commit上（默认打到最新提交的commit上）<br><code>git show v0.9</code>查看标签信息<br><code>git tag -a v0.1 -m &quot;version 0.1 released&quot; 1094adb</code> 创建带有说明的标签（<code>git show v0.1</code>即可查看）<br><code>git tag -d v0.1</code>  删除标签<br><code>git push origin v1.0</code> 推送某个标签到远程<br><code>git push origin --tags</code> 推送所有尚未推送的本地标签<br><em>如果要删除远程标签</em></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git tag -d v0.9 &#x2F;&#x2F;先删除本地的标签</span><br><span class="line">git push origin : refs&#x2F;tags&#x2F;v0.9  &#x2F;&#x2F;再远程删除</span><br><span class="line">&#x2F;&#x2F;refs&#x2F;tags&#x2F; 是固定的</span><br></pre></td></tr></table></figure>
+
+<p>最后附上一张Git Cheat Sheet<br><a href="https://gitee.com/liaoxuefeng/learn-java/raw/master/teach/git-cheatsheet.pdf">Git Cheat Sheet</a></p>
+]]></content>
       <categories>
-          
-          <category> 问题 </category>
-          
+        <category>git</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> hexo </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>git命令</title>
-      <link href="2020/06/28/git%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/"/>
-      <url>2020/06/28/git%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/</url>
-      
-        <content type="html"><![CDATA[<p>仅以readme.txt为例</p><a id="more"></a><h4 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h4><p><code>git init</code> 初始化目录为git仓库<br><code>git add readme.txt</code> 添加文件到暂存区<br><code>git add .</code> 添加所有<br><code>git commit -m &quot;wrote a readme file&quot;</code> 将暂存区中的提交并说明</p><h4 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h4><p><code>git status</code> 查看仓库当前状态<br><code>git diff readme.txt</code> 查看具体修改内容<br><code>git log</code> 查看提交日志<br><code>git log --pretty=oneline</code> 精简信息<br><code>git reset --hard HEAD^</code> 回退到上一个版本（HEAD表示当前版本，HEAD^^表示上上一个版本，HEAD~100表示上100个版本）<br><code>cat readme.txt</code> 查看文件内容</p><p><code>git reset --hard 1094a</code> 回退到版本号为1094a的版本<br><code>git reflog</code> 查看命令历史<br><code>git checkout -- readme.txt</code> 撤回对工作区的修改<br><code>git reset HEAD readme.txt</code> 撤销暂存区的修改重新放回工作区（然后再用上一条指令）</p><p><code>rm readme.txt</code> 删除工作区文件<br><code>git rm readme.txt</code> 删除版本库<br><code>git commit -m &quot;delete readme.txt</code> 提交<br><code>git checkout -- readme.txt</code>从版本库中恢复删除的</p><h4 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h4><p><code>git remote add origin git@github.com:dstx123/仓库名.git</code> 关联远程仓库<br><em>如果出现错误提示：fatal: remote origin already exists.则使用命令 <code>git remote rm origin</code>和 <code>git remote add origin</code></em><br><code>git push -u origin master</code> 第一次把本地库的master分支推送到远程库上（-u加上后也会关联其他分支）<br><code>git push origin master</code> 后来推送</p><p><code>git clone git@github.com:dstx123/仓库名.git</code> 克隆一个本地库</p><h4 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h4><p><code>git checkout -b dev</code> 创建并切换到dev分支<br>这条命令相当于<code>git branch dev</code> 和 <code>git checkout dev</code>两条命令（创建和切换）<br><code>git branch</code> 查看当前分支<br><code>git checkout master</code> 切换到master分支<br><code>git merge dev</code> 将dev分支合并到master分支上<br><code>git branch -d dev</code> 合并完成后删除dev分支<br><code>git switch -c dev</code> 创建并切换到dev分支<br><code>git switch master</code> 切换到master分支<br>分支合并冲突时手动修改<br><code>git log --graph --pretty=oneline --abbrev-commit</code>查看分支合并图</p><p>git合并分支时采用fast forward模式，这种模式看不出曾经做过合并，在删除分支后，会丢失分支信息，故采用<code>git merge --no-ff -m &quot;merge with no-ff&quot; dev</code> 的指令合并并评论</p><p><code>git stash</code> 存储当前工作（使用后工作区干净，可执行其他分支操作）<br><code>git stash list</code> 查看刚刚的工作现场<br><code>git stash pop</code>  恢复并删除刚刚存的stash内容<br><code>git stash apply</code> 恢复但不删除刚刚的stash内容<br>dev分支是早期从mster上分出来的，所以如果刚刚对master分支修改了，此时也需要对dev分支修改。<br><code>git cherry-pick 4c805e2</code> 用之前修改的版本号直接复制master的修改到dev<br><code>git branch -D feature</code>删除还未合并的feature分支<br><code>git rebase</code> 把分叉的历史提交记录整理成一条直线</p><h4 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a>标签管理</h4><p><code>git checkout master</code> 先切换到要打标签的分支上<br><code>git tag v1.0</code>打上一个v1.0的标签<br><code>git tag</code> 查看所有标签（标签不是按时间顺序的，是按字母顺序）<br><code>git tag v0.9 f52c633</code> 打到指定版本号的commit上（默认打到最新提交的commit上）<br><code>git show v0.9</code>查看标签信息<br><code>git tag -a v0.1 -m &quot;version 0.1 released&quot; 1094adb</code> 创建带有说明的标签（<code>git show v0.1</code>即可查看）<br><code>git tag -d v0.1</code>  删除标签<br><code>git push origin v1.0</code> 推送某个标签到远程<br><code>git push origin --tags</code> 推送所有尚未推送的本地标签<br><em>如果要删除远程标签</em></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git tag -d v0.9 &#x2F;&#x2F;先删除本地的标签</span><br><span class="line">git push origin : refs&#x2F;tags&#x2F;v0.9  &#x2F;&#x2F;再远程删除</span><br><span class="line">&#x2F;&#x2F;refs&#x2F;tags&#x2F; 是固定的</span><br></pre></td></tr></table></figure><p>最后附上一张Git Cheat Sheet<br><a href="https://gitee.com/liaoxuefeng/learn-java/raw/master/teach/git-cheatsheet.pdf">Git Cheat Sheet</a></p>]]></content>
-      
-      
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo迁移记录</title>
+    <url>/2020/11/20/hexo%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>由于前段时间将电脑格式化后hexo本地配置全部丢失，重新配置hexo又比较繁琐，故记录一下这次hexo迁移方法</p>
+<a id="more"></a>
+<ol>
+<li>执行<code>hexo init</code>后从原博客文件中复制替换以下文件(夹)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">_config.yml</span><br><span class="line">source</span><br><span class="line">themes</span><br></pre></td></tr></table></figure>
+执行<code>hexo generate</code>和<code>hexo server</code>后可本地预览博客</li>
+<li>打开cmd执行<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;Github的注册邮箱地址&quot;</span><br></pre></td></tr></table></figure>
+一路enter后得到一下信息<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Your public key has been saved in &#x2F;c&#x2F;Users&#x2F;user&#x2F;.ssh&#x2F;id_rsa.pub.</span><br></pre></td></tr></table></figure>
+找到该文件，打开复制里面的所有内容，然后进入github找到New SSH key ——Title：blog —— Key：输入刚才复制的—— Add SSH key</li>
+<li><code>hexo deploy</code>收工</li>
+</ol>
+]]></content>
       <categories>
-          
-          <category> git </category>
-          
+        <category>问题</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> git </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>《深入理解计算机系统》笔记--第一章</title>
-      <link href="2020/06/06/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8B%E7%AC%94%E8%AE%B0--%E7%AC%AC%E4%B8%80%E7%AB%A0/"/>
-      <url>2020/06/06/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8B%E7%AC%94%E8%AE%B0--%E7%AC%AC%E4%B8%80%E7%AB%A0/</url>
-      
-        <content type="html"><![CDATA[<p>最近读《深入理解计算机系统》打算记点笔记，特开一个分类写文也算是督促自己学习吧。</p><a id="more"></a><h2 id="TOC"><a href="#TOC" class="headerlink" title="[TOC]"></a>[TOC]</h2><h3 id="系统的硬件组成"><a href="#系统的硬件组成" class="headerlink" title="系统的硬件组成"></a>系统的硬件组成</h3><ol><li>总线<br>贯穿整个整个系统的的是一组点资管道，称作总线。</li><li>I/O设备<br><img src="/2020/06/06/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8B%E7%AC%94%E8%AE%B0--%E7%AC%AC%E4%B8%80%E7%AB%A0/1.png" alt="一个典型系统的硬件组成"></li><li>主存<br>主存是一个临时存储设备，在处理器执行程序时用来存放程序和程序处理的数据，由一组动态随机存储器(DRAM)芯片组成。</li><li>处理器<br>即中央处理单元CPU</li></ol><ul><li>处理器的指令集构架和处理器的微体系结构区别：<br>&emsp;指令集构架描述的是每条机器代码指令的效果，而微体系结构描述的是处理器实际上是如何实现的。</li></ul><hr><h3 id="高速缓存至关重要"><a href="#高速缓存至关重要" class="headerlink" title="高速缓存至关重要"></a>高速缓存至关重要</h3><p>&emsp;&emsp;根据机械原理，较大的存储设备要比较小的存储设备运行得慢，且快速设备的造价远高于同类的低速设备。因此系统设计者采用了更小更快的存储设备——高速缓存存储器(cache memory简称cache或高速缓存),作为暂时的集结趋于，存放处理器近期可能会需要的信息。</p><hr><h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>进程是操作系统对一个正在运行的程序的一种抽象。<br><strong>并发运行</strong>：一个进程的指令和另一个进程的指令是交错执行的。<br>多核处理器可同时执行多个程序。<br>操作系统实现这种交错执行的机制称为<strong>上下文切换</strong>。<br>由一个进程到另一个进程的转换是由操作系统的内核管理的。内核是系统管理全部进程所用代码和数据结构的集合。</p><hr><h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>一个进程可由多个称为线程的执行单元组成</p><hr><h3 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h3><p>虚拟内存是一个抽象概念，它为每个进程提供了一个假象，即每个进程好像都在独占地使用主存，每个进程看到的内存都是一致的，称为虚拟地址空间。<br><img src="/2020/06/06/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8B%E7%AC%94%E8%AE%B0--%E7%AC%AC%E4%B8%80%E7%AB%A0/2.png" alt="linux进程的虚拟地址空间"></p><hr><h3 id="Amdahl定理"><a href="#Amdahl定理" class="headerlink" title="Amdahl定理"></a>Amdahl定理</h3><p>当对系统的某个部分加速时，其对系统整体性能的影响取决于该部分的重要性和加速程度。若系统执行某应用程序需要时间为$T_{old}$，假设系统某部分所需执行时间与该事件的比例为$a$，而该部分性能提升比例为$k$，即该部分初始所需时间为$aT_{old}$，现在所需时间为$(aT_{old})/k$。因此，总的执行时间应为$$T_{new}=(1-a)T_{old}+(aT_{old})/k=T_{old}[(1-a)+a/k]$$<br>由此，可计算出加速度比$S=T_{old}/T_{new}$为$$S=\frac{1}{(1-a)+a/k}$$<br><strong>综上：要想显著加速整个系统，必须提升全系统中相当大的部分的速度。</strong></p><hr><h3 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h3><p>并发：指一个同时具有多个活动的系统<br>并行：指用并发来使一个系统运行得更快</p><ol><li>线程级并发</li><li>指令级并行</li><li>单指令、多数据并行</li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>pid笔记</title>
+    <url>/2020/11/28/pid%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>今天智能车培训听完綦佬讲解pid体验良好，决定做下记录，顺便自己也正儿八经写篇关于pid的笔记。</p>
+<a id="more"></a>
+<h4 id="一、PID基础"><a href="#一、PID基础" class="headerlink" title="一、PID基础"></a>一、PID基础</h4><p><strong>1.1 控制系统的框图</strong></p>
+<ul>
+<li>执行器</li>
+<li>传感器</li>
+<li>控制器<br><img src="/2020/11/28/pid%E7%AC%94%E8%AE%B0/1.png" alt="控制系统的框图"></li>
+</ul>
+<p><strong>1.2 控制器的设计</strong></p>
+<p><strong><em>1.2.1 on-off控制</em></strong></p>
+<p>&emsp;&emsp;比如我们举个烧水壶加热到60℃的例子，仅仅控制电热丝的通断可实现on-off控制，即当温度小于60℃时通，大于60℃时断，这样便可实现简单的控制。<br>&emsp;&emsp;这样的设计虽然简单但是这样存在一定的缺陷：频繁开关会损伤执行器的寿命。</p>
+<p><strong><em>1.2.2 带死区的on-off控制</em></strong></p>
+<p>&emsp;&emsp;即在1.2.1的基础上，假如并不需要控制水温60℃，而是存在一定的死区，如50℃-70℃都可以，则此时温度小于50℃时通，大于70℃时断。<br>&emsp;&emsp;这样减少了开关通断的频率从而提高了使用寿命。</p>
+<p><strong><em>1.2.3 相对连续的控制器–P控制(Proportion)</em></strong></p>
+<p>&emsp;&emsp;看了上述的两种控制器，我们不由得思考是否存在一种控制器能同时相对精准的控制温度，同时又能减少开关的频繁通断。<br>&emsp;&emsp;由此我们引出了相对连续的控制器。与之相应的也应该有相对连续的传感器。</p>
+<p>&emsp;&emsp;我们记当前值$Z$与预期值$X$的偏差为$error$，即$$error=X-Z$$</p>
+<p>于是输出值$out=K_c*error$ ，其中$K_c$为比例系数</p>
+<p>当$error$减小时，$out$也随之减小</p>
+<p>通过error值我们便可以用占空比来得到相对连续的控制量。</p>
+<p>那么这样是否存在问题呢？<br>&emsp;&emsp;我们可以看到当Z与X相等时，error值则为0，即停止输出，当Z小于X时再输出。从一个长的时间跨度来看输出的平均值便小于了预期值，即存在稳态误差。<br>&emsp;&emsp;另外，我们还要注意$K_c$值不能设的太大，否则一个很小的误差便会引起系统很大的改变，于是误差便会越来越大(发散系统)。</p>
+<p><strong><em>1.2.4 P-I控制 (比例-积分) (Proportion-Integration)</em></strong></p>
+<p>为减小稳态误差，我们引入了积分量<br>$$out=K_c(e(t)+\frac{1}{T_i}\int e(t)dt)$$<br>其中$\frac{1}{T_i}$为积分时间常数，$\frac{1}{T_i}\int e(t)dt$为耗散<br>这样又是否已经可以很好的控制系统了呢？<br>我们思考这样两种情况：<br><img src="/2020/11/28/pid%E7%AC%94%E8%AE%B0/2.png" alt="D的引入"></p>
+<p>可以看到左图的当前值是趋向于预期值的，而右图的当前值是远离期望值的，对于P-I控制来说他们输出的out值却是一样的，对于这样的情况这样的控制策略显然并不好。</p>
+<p><strong><em>1.2.4 P-I-D控制 (比例-积分-微分) (Proportion-Integration-Derivation)</em></strong></p>
+<p>于是我们引入微分项<br>$$out=K_c\Big(e(t)+\frac{1}{T_i}\int e(t)dt+T_d\frac{de(t)}{dt}\Big)$$<br>这里当$K_c$变化时，PID三项均会变化，于是我们引入一种更实用的写法<br>$$out=K_pe(t)+K_i\int e(t)dt+K_d\frac{de(t)}{dt}$$<br>只需改变$K_p$、$K_i$、$K_d$即可分别控制PID三项</p>
+<h4 id="二、PID调参"><a href="#二、PID调参" class="headerlink" title="二、PID调参"></a>二、PID调参</h4><h4 id="三、PID理论证明"><a href="#三、PID理论证明" class="headerlink" title="三、PID理论证明"></a>三、PID理论证明</h4><h4 id="四、待定"><a href="#四、待定" class="headerlink" title="四、待定"></a>四、待定</h4><p><strong>咕咕咕咕咕咕咕咕</strong></p>
+]]></content>
       <categories>
-          
-          <category> 深入理解计算机系统 </category>
-          
+        <category>智能车</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> 基础 </tag>
-            
-            <tag> 读书笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>next中katex不显示的问题</title>
-      <link href="2020/05/29/next%E4%B8%ADkatex%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-      <url>2020/05/29/next%E4%B8%ADkatex%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-      
-        <content type="html"><![CDATA[<p>经过一个上午的折腾终于整明白了怎么在hexo中用mathjax渲染。</p><p>NexT 主题的 MathJax 插件默认是禁用的<br>在主题配置文件_config.yml中找到如下代码段</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># Math Formulas Render Support</span><br><span class="line">math:</span><br><span class="line">  # Default (true) will load mathjax &#x2F; katex script on demand.</span><br><span class="line">  # That is it only render those page which has &#96;mathjax: true&#96; in Front-matter.</span><br><span class="line">  # If you set it to false, it will load mathjax &#x2F; katex srcipt EVERY PAGE.</span><br><span class="line">  per_page: true</span><br><span class="line"></span><br><span class="line">  # hexo-renderer-pandoc (or hexo-renderer-kramed) required for full MathJax support.</span><br><span class="line">  mathjax:</span><br><span class="line">    enable: true</span><br><span class="line">    # See: https:&#x2F;&#x2F;mhchem.github.io&#x2F;MathJax-mhchem&#x2F;</span><br><span class="line">    mhchem: true</span><br><span class="line"></span><br><span class="line">  # hexo-renderer-markdown-it-plus (or hexo-renderer-markdown-it with markdown-it-katex plugin) required for full Katex support.</span><br><span class="line">  katex:</span><br><span class="line">    enable: false</span><br><span class="line">    # See: https:&#x2F;&#x2F;github.com&#x2F;KaTeX&#x2F;KaTeX&#x2F;tree&#x2F;master&#x2F;contrib&#x2F;copy-tex</span><br><span class="line">    copy_tex: false</span><br></pre></td></tr></table></figure><p>将对应的<code>enable</code>的值改为<code>true</code>即可启用 MathJax。<br>同时注意 per_page 上面的注释，注释表明了，MathJax 只渲染在文件前端注明 mathjax: true 字段的文章，例如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">layout: hexo</span><br><span class="line">title: next中katex不显示的问题</span><br><span class="line">date: 2020-05-29 14:43:03</span><br><span class="line">tags: [hexo]</span><br><span class="line">categories: [问题]</span><br><span class="line">mathjax: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure><p>接下来就可以愉快的使用mathjax了~</p>]]></content>
-      
-      
+      <tags>
+        <tag>pid</tag>
+        <tag>智能车</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>next中katex不显示的问题</title>
+    <url>/2020/05/29/next%E4%B8%ADkatex%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>经过一个上午的折腾终于整明白了怎么在hexo中用mathjax渲染。</p>
+<p>NexT 主题的 MathJax 插件默认是禁用的<br>在主题配置文件_config.yml中找到如下代码段</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Math Formulas Render Support</span><br><span class="line">math:</span><br><span class="line">  # Default (true) will load mathjax &#x2F; katex script on demand.</span><br><span class="line">  # That is it only render those page which has &#96;mathjax: true&#96; in Front-matter.</span><br><span class="line">  # If you set it to false, it will load mathjax &#x2F; katex srcipt EVERY PAGE.</span><br><span class="line">  per_page: true</span><br><span class="line"></span><br><span class="line">  # hexo-renderer-pandoc (or hexo-renderer-kramed) required for full MathJax support.</span><br><span class="line">  mathjax:</span><br><span class="line">    enable: true</span><br><span class="line">    # See: https:&#x2F;&#x2F;mhchem.github.io&#x2F;MathJax-mhchem&#x2F;</span><br><span class="line">    mhchem: true</span><br><span class="line"></span><br><span class="line">  # hexo-renderer-markdown-it-plus (or hexo-renderer-markdown-it with markdown-it-katex plugin) required for full Katex support.</span><br><span class="line">  katex:</span><br><span class="line">    enable: false</span><br><span class="line">    # See: https:&#x2F;&#x2F;github.com&#x2F;KaTeX&#x2F;KaTeX&#x2F;tree&#x2F;master&#x2F;contrib&#x2F;copy-tex</span><br><span class="line">    copy_tex: false</span><br></pre></td></tr></table></figure>
+<p>将对应的<code>enable</code>的值改为<code>true</code>即可启用 MathJax。<br>同时注意 per_page 上面的注释，注释表明了，MathJax 只渲染在文件前端注明 mathjax: true 字段的文章，例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">layout: hexo</span><br><span class="line">title: next中katex不显示的问题</span><br><span class="line">date: 2020-05-29 14:43:03</span><br><span class="line">tags: [hexo]</span><br><span class="line">categories: [问题]</span><br><span class="line">mathjax: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>接下来就可以愉快的使用mathjax了~</p>
+]]></content>
       <categories>
-          
-          <category> 问题 </category>
-          
+        <category>问题</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Latex </tag>
-            
-            <tag> hexo </tag>
-            
-            <tag> Mathjax </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Latex笔记</title>
-      <link href="2020/05/29/Latex%E7%AC%94%E8%AE%B0/"/>
-      <url>2020/05/29/Latex%E7%AC%94%E8%AE%B0/</url>
-      
-        <content type="html"><![CDATA[<p>[TOC]</p><h3 id="零、关于Latex、Mathjax、Talex"><a href="#零、关于Latex、Mathjax、Talex" class="headerlink" title="零、关于Latex、Mathjax、Talex"></a>零、关于Latex、Mathjax、Talex</h3><ul><li><p>LaTeX是一种基于ΤΕΧ的排版系统，由美国计算机学家莱斯利·兰伯特（Leslie Lamport）在20世纪80年代初期开发，利用这种格式，即使使用者没有排版和程序设计的知识也可以充分发挥由TeX所提供的强大功能，能在几天，甚至几小时内生成很多具有书籍质量的印刷品。对于生成复杂表格和数学公式，这一点表现得尤为突出。因此它非常适用于生成高印刷质量的科技和数学类文档。</p><a id="more"></a></li><li><p>MathJax是一个显示网络上数学公式的开源JavaScript引擎库，它可以在所有浏览器上面工作，其中就支持LaTeX，MathML和AsciiMath 符号，里面的数字会被MathJax使用JavaScript引擎解析成HTML，SVG或者是MathML 方程式，然后在现代的浏览器里面显示。 它的设计目标是利用最新的web技术，构建一个支持math的web平台。支持主要的浏览器和操作系统,包括那些移动设备</p></li><li><p>Talex也是一个web数学公式渲染器。可惜hexo对Talex的支持似乎并不很友好。<br>Talex优点如下：<br>快速：并发渲染，无需重排页面。根据这个测试，性能绝对秒杀MathJax。<br>渲染效果好：采用TeX语法，渲染效果达到印刷出版级别。<br>无依赖：不依赖其它库。<br>支持服务器端渲染：例如，服务器端的Node.js程序调用KaTeX，把渲染好的HTML片段直接发送给客户端。</p></li></ul><hr><p><em>下面介绍KaTex/LaTex用法</em></p><h3 id="一、基本操作"><a href="#一、基本操作" class="headerlink" title="一、基本操作"></a>一、基本操作</h3><h4 id="插入公式"><a href="#插入公式" class="headerlink" title="插入公式"></a>插入公式</h4><ul><li><strong>行中公式</strong><br><code>$在这中间加公式$</code><br>效果：$hello world$</li><li><strong>独立公式</strong><br><code>$$在这中间加公式$$</code><br>效果：$$hello world$$<h4 id="的使用"><a href="#的使用" class="headerlink" title="{}的使用"></a>{}的使用</h4></li><li><code>$&#123;xyx&#125;^&#123;1+2+3&#125;$</code><br>效果：${xyx}^{1+2+3}$<br>只有一个字符时可不写{}</li><li><code>**\text&#123;&#125;</code>可用来划出一个文字区域，然后用<code>\operatorname&#123;&#125;</code>产生公式操作**<br>如：<code>$\operatorname&#123;Asin&#125;\text&#123; (ωx+μ) &#125;$</code><br>效果：$\operatorname{Asin}\text{ (ωx+μ) }$<br>而在\text{}中还可以再插入别的公式<br>如: <code>$$f(n)=n^n \quad \text&#123;n$\in N^\ast$&#125;$$</code><br>效果：$$f(n)=n^n \quad \text{n$\in N^\ast$}$$</li></ul><h3 id="二、“花里胡哨”的操作"><a href="#二、“花里胡哨”的操作" class="headerlink" title="二、“花里胡哨”的操作"></a>二、“花里胡哨”的操作</h3><h4 id="1-上下标"><a href="#1-上下标" class="headerlink" title="1. 上下标"></a>1. 上下标</h4><p><code>^</code>表示上标，<code>_</code>表示下标</p><table><thead><tr><th>代码</th><th>效果</th></tr></thead><tbody><tr><td><code>$C^&#123;2^2&#125;_&#123;n+1&#125;$</code></td><td>$C^{2^2}_{n+1}$</td></tr><tr><td><code>$x^&#123;2^2_2&#125;_2$</code></td><td>$x^{2^2_2}_2$</td></tr><tr><td><code>$&#123;^1_2&#125;\bigotimes &#123;^3_4&#125;$</code></td><td>${^1_2}\bigotimes {^3_4}$</td></tr><tr><td><code>$^&#123;18&#125; _8 O ^&#123;-2&#125; _2$</code></td><td>$^{18} _8 O ^{-2} _2$</td></tr></tbody></table><h4 id="2-字符变大变小"><a href="#2-字符变大变小" class="headerlink" title="2. 字符变大变小"></a>2. 字符变大变小</h4><p>在符号前插入<code>\large</code>或<code>\small</code>命令即可</p><table><thead><tr><th>代码</th><th>效果</th></tr></thead><tbody><tr><td><code>$\tiny x$</code></td><td>$\tiny x$</td></tr><tr><td><code>$\scriptsize x$</code></td><td>$\scriptsize x$</td></tr><tr><td><code>$\footnotesize x$</code></td><td>$\footnotesize x$</td></tr><tr><td><code>$\small x$</code></td><td>$\small x$</td></tr><tr><td><code>$\normalsize x$</code></td><td>$\normalsize x$</td></tr><tr><td><code>$x$</code></td><td>$x$</td></tr><tr><td><code>$\large x$</code></td><td>$\large x$</td></tr><tr><td><code>$\Large x$</code></td><td>$\Large x$</td></tr><tr><td><code>$\LARGE x$</code></td><td>$\LARGE x$</td></tr><tr><td><code>$\huge x$</code></td><td>$\huge x$</td></tr><tr><td><code>$\Huge x$</code></td><td>$\Huge x$</td></tr><tr><td><code>$\small\ &#123;aa&#125;a \large &#123;a&#125;aa$</code></td><td>$\small\ {aa}a \large {a}aa$</td></tr><tr><td><code>$\boldsymbol&#123;\alpha 12bcEF&#125;12bcEF$</code></td><td>$\boldsymbol{\alpha 12bcEF}12bcEF$</td></tr></tbody></table><h4 id="3-字体"><a href="#3-字体" class="headerlink" title="3. 字体"></a>3. 字体</h4><table><thead><tr><th>代码</th><th>效果</th></tr></thead><tbody><tr><td><code>$\rm &#123;罗马体abc123&#125;$</code></td><td>$\rm {罗马体abc123}$</td></tr><tr><td><code>$it &#123;意大利斜体abcde 123&#125;$</code></td><td>$\it {意大利斜体abc123}$</td></tr><tr><td><code>$\bf &#123;粗体abc123&#125;$</code></td><td>$\bf {粗体abc123}$</td></tr><tr><td><code>$\sf &#123;等线体abc123&#125;$</code></td><td>$\sf {等线体abc123}$</td></tr><tr><td><code>$\tt &#123;打印体abc123&#125;$</code></td><td>$\tt {打印体abc123}$</td></tr><tr><td><code>$\frak &#123;旧德式字体abc123&#125;$</code></td><td>$\frak {旧德式字体abc123}$</td></tr><tr><td><code>$Bbb &#123;黑板粗体abc123&#125;$</code></td><td>$Bbb {黑板粗体abc123}$</td></tr><tr><td><code>$\mathcal &#123;手写体abc123&#125;$</code></td><td>$\mathcal {手写体abc123}$</td></tr><tr><td><code>$\bold &#123;abc123&#125;$</code></td><td>$\bold {abc123}$</td></tr><tr><td><code>$\bm &#123;abc123&#125;$</code></td><td>$\bm {abc123}$</td></tr><tr><td><code>$\mathscr &#123;abc123&#125;$</code></td><td>$\mathscr {abc123}$</td></tr></tbody></table><h4 id="4-输入换行和空格"><a href="#4-输入换行和空格" class="headerlink" title="4. 输入换行和空格"></a>4. 输入换行和空格</h4><table><thead><tr><th>代码</th><th>效果</th></tr></thead><tbody><tr><td><code>$用\space或~或 \ 来空格$</code></td><td>$用\space或~或 \ 来空格$</td></tr><tr><td><code>$用\newline或者 \\ 来换行$</code></td><td>$用\newline或者 \ 来换行$</td></tr></tbody></table><h4 id="5-输入括号和分隔符"><a href="#5-输入括号和分隔符" class="headerlink" title="5.输入括号和分隔符"></a>5.输入括号和分隔符</h4><table><thead><tr><th>代码</th><th>效果</th><th>代码</th><th>效果</th></tr></thead><tbody><tr><td><code>$\lfloor &#123;a&#125; \rfloor$</code></td><td>$\lfloor {a} \rfloor$</td><td><code>$\lceil &#123;b&#125; \rceil$</code></td><td>$\lceil {b} \rceil$</td></tr><tr><td><code>$\lbrace &#123;c&#125; \rbrace$</code></td><td>$\lbrace {c} \rbrace$</td><td><code>$\&#123; &#123;d&#125; \&#125;$</code></td><td>${ {d} }$</td></tr><tr><td><code>$\langle &#123;e&#125; \rangle$</code></td><td>$\langle {e} \rangle$</td><td><code>$\left( &#123;f&#125; \right)$</code></td><td>$\left( {f} \right)$</td></tr><tr><td><code>$\left[ &#123;g&#125; \right]$</code></td><td>$\left[ {g} \right]$</td><td><code>$\langle &#123;h&#125; \rangle$</code></td><td>$\langle {h} \rangle$</td></tr><tr><td><code>$/ &#123;i&#125; \backslash$</code></td><td>$/ {i} \backslash$</td><td><code>$\lmoustache &#123;j&#125; \rmoustache$</code></td><td>$\lmoustache {j} \rmoustache$</td></tr><tr><td><code>$\ulcorner &#123;k&#125; \urcorner$</code></td><td>$\ulcorner {k} \urcorner$</td><td><code>$\llcorner &#123;l&#125; \lrcorner$</code></td><td>$\llcorner {l} \lrcorner$</td></tr><tr><td><code>$\vert &#123;m&#125; \vert$</code></td><td>$\vert {m} \vert$</td><td><code>$\Vert &#123;n&#125; \Vert$</code></td><td>$\Vert {n} \Vert$</td></tr><tr><td><code>$\lgroup &#123;o&#125; \rgroup$</code></td><td>$\lgroup {o} \rgroup$</td><td><code>$\lt &#123;p&#125; \gt$</code></td><td>$\lt {p} \gt$</td></tr><tr><td><code>$\lang &#123;q&#125; \rang$</code></td><td>$\lang {q} \rang$</td><td></td><td></td></tr></tbody></table><p><code>$| \frac&#123;a&#125;&#123;b&#125; |$</code><br>效果：$| \frac{a}{b} |$<br><code>$\| \frac&#123;a&#125;&#123;b&#125; \|$</code><br>效果：$| \frac{a}{b} |$</p><p>此外，可用<code>\big \Big \bigg \Bigg</code>控制括号大小，比如</p><figure class="highlight latex"><figcaption><span>&#123;.line-numbers&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br><span class="line"><span class="keyword">\Bigg</span> ( </span><br><span class="line"><span class="keyword">\bigg</span> [ </span><br><span class="line"><span class="keyword">\Big</span> <span class="keyword">\&#123;</span> </span><br><span class="line"><span class="keyword">\big</span> <span class="keyword">\langle</span> </span><br><span class="line"><span class="keyword">\|</span> </span><br><span class="line"><span class="keyword">\frac</span>&#123;a&#125;&#123;b&#125; </span><br><span class="line"><span class="keyword">\|</span> </span><br><span class="line"><span class="keyword">\big</span> <span class="keyword">\rangle</span></span><br><span class="line"><span class="keyword">\Big</span> <span class="keyword">\&#125;</span></span><br><span class="line"><span class="keyword">\bigg</span> ] </span><br><span class="line"><span class="keyword">\Bigg</span> )</span><br><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br></pre></td></tr></table></figure><p>得到：<br>$$<br>\Bigg (<br>    \bigg [<br>        \Big {<br>            \big \langle<br>                |<br>                    \frac{a}{b}<br>                |<br>            \big \rangle<br>        \Big }<br>    \bigg ]<br>\Bigg )<br>$$<br>用前面2.的方法也可<br>另外，当要在不同行显示对应括号时，可以在每一行对应处使用 \left. 或 \right. 来放一个”影子”括号：<code>$$a = \left(1 + 2 + 3 + \cdots\right. \\ \left. n - 2 + n - 1 + n\right.)$$</code><br>得到：<br>$$a = \left(1 + 2 + 3 + \cdots\right. \ \left. n - 2 + n - 1 + n\right.)$$<br>此外，\left(\right)等会自动匹配括号大小,如<br><code>$$\large a_\text&#123;向下&#125;=g+(\frac&#123;\frac&#123;G_&#123;总&#125;&#125;&#123;g&#125;&#125;&#123;\frac&#123;p_1&#125;&#123;v_1&#125;+m_2&#125;)$$</code><br><code>$$\large a_\text&#123;向下&#125;=g+\left(\frac&#123;\frac&#123;G_&#123;总&#125;&#125;&#123;g&#125;&#125;&#123;\frac&#123;p_1&#125;&#123;v_1&#125;+m_2&#125;\right)$$</code><br>效果：$$\large a_\text{向下}=g+(\frac{\frac{G_{总}}{g}}{\frac{p_1}{v_1}+m_2})$$<br>$$\large a_\text{向下}=g+\left(\frac{\frac{G_{总}}{g}}{\frac{p_1}{v_1}+m_2}\right)$$</p><p>若要将行内显示的分隔符也变大，可使用\middle命令(必须用\left. \right.),如：<br><code>$        a          | \frac&#123;b&#125;&#123;c&#125; $</code><br><code>$\left. a \middle \| \frac&#123;b&#125;&#123;c&#125; \right.$</code><br>效果：<br>$        a          | \frac{b}{c} $<br>$\left. a \middle | \frac{b}{c} \right.$</p><p>另一类比较不同的括号</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$\tbinom&#123;n&#125;&#123;k&#125;$</span><br><span class="line">$\binom&#123;n&#125;&#123;k&#125;$</span><br><span class="line">$\dbinom&#123;n&#125;&#123;k&#125;$</span><br><span class="line">$&#123;n\brace k&#125;$</span><br><span class="line">$&#123;n\choose k&#125;$</span><br><span class="line">$&#123;n\brack k&#125;$</span><br></pre></td></tr></table></figure><p>对应效果<br>$\tbinom{n}{k}$</p><p>$\binom{n}{k}$</p><p>$\dbinom{n}{k}$</p><p>${n\brace k}$</p><p>${n\choose k}$</p><p>${n\brack k}$</p><h4 id="6-上下标"><a href="#6-上下标" class="headerlink" title="6.上下标"></a>6.上下标</h4>]]></content>
-      
-      
+      <tags>
+        <tag>Latex</tag>
+        <tag>hexo</tag>
+        <tag>Mathjax</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>markdown笔记</title>
+    <url>/2020/05/28/markdown%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>学习markdown记录的一些笔记</p>
+<p>ctrl+k v  预览<br>shift+enter 运行代码块</p>
+<a id="more"></a>
+
+<p>标题</p>
+<h1 id="这是-一级标题"><a href="#这是-一级标题" class="headerlink" title="这是  一级标题"></a>这是 <h2> 一级标题</h2></h1><h2 id="这是-二级标题"><a href="#这是-二级标题" class="headerlink" title="这是  二级标题"></a>这是 <h2> 二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6><h1 id="这个标题有-1-个-id-my-id"><a href="#这个标题有-1-个-id-my-id" class="headerlink" title="这个标题有 1 个 id { #my_id}"></a>这个标题有 1 个 id { #my_id}</h1><h1 id="这个标题有-2-个-classes-class1-class2"><a href="#这个标题有-2-个-classes-class1-class2" class="headerlink" title="这个标题有 2 个 classes {.class1 .class2}"></a>这个标题有 2 个 classes {.class1 .class2}</h1><p>强调<br><em>这会是 斜体 的文字</em><br><em>这会是 斜体 的文字—</em><br><strong>这会是 粗体 的文字</strong><br><strong>这会是 粗体 的文字</strong><br><em>你也 <strong>组合</strong> 这些符号</em><br><del>这个文字将会被横线删除</del></p>
+<p>列表<br>无序列表</p>
+<ul>
+<li>Item 1</li>
+<li>Item 2<ul>
+<li>Item 2a</li>
+<li>Item 2b<br>有序列表</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>Item 1</li>
+<li>Item 2</li>
+<li>Item 3<ol>
+<li>Item 3a</li>
+<li>Item 3b</li>
+</ol>
+</li>
+</ol>
+<p>添加图片(第一个是链接第二个直接显示)<br>！<a href="%E5%BD%93%E5%89%8D%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E8%B7%AF%E5%BE%84">口罩</a><br>Format: <img src="/2020/05/28/markdown%E7%AC%94%E8%AE%B0/%E5%BD%93%E5%89%8D%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E8%B7%AF%E5%BE%84" alt="Alt Text"></p>
+<p>链接<br><a href="https://github.com/">https://github.com</a> - 自动生成！<br><a href="https://github.com/">Github</a></p>
+<p>引用<br>正如 Kanye West 所说：</p>
+<blockquote>
+<p>We’re living the future so<br>the present is our past.</p>
+</blockquote>
+<p>分割线(记得中间要空格)<br>如下，三个或者更多的</p>
+<hr>
+<p>连字符</p>
+<hr>
+<p>星号</p>
+<hr>
+<p>下划线</p>
+<p>行内代码<br>我觉得你应该在这里使用 <code>&lt;addr&gt;</code> 才对。</p>
+<p>代码块</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">你可以在你的代码上面和</span><br><span class="line">下面添加&#96;&#96;&#96;来表示代码块</span><br></pre></td></tr></table></figure>
+
+<p>语法高亮<br>你可以给你的代码块添加任何一种语言的语法高亮<br>例如，给代码添加ruby语言的语法高亮：</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">&#x27;redcarpet&#x27;</span></span><br><span class="line">markdown = Redcarpet.new(<span class="string">&quot;Hello World!)</span></span><br><span class="line"><span class="string">puts markdown.to_html</span></span><br></pre></td></tr></table></figure>
+
+<p>代码块class(MPE扩展的特性)<br>你可以给你的代码设置class。<br>例如，添加class1 class2 到一个代码块：</p>
+<figure class="highlight javascript"><figcaption><span>&#123;.class1 .class2&#125;</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x,y</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x+y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码行数<br>添加line-numbers class 就可以了。</p>
+<figure class="highlight javascript"><figcaption><span>&#123;.line-numbers&#125;</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x,y</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x+y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>高亮代码行数<br>添加<code>highlight</code>属性的方式来高亮代码行数</p>
+<figure class="highlight javascript"><figcaption><span>&#123;highlight</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="string">``</span><span class="string">`</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>javascript &#123;highlight=<span class="number">10</span>-<span class="number">20</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><figcaption><span>&#123;highlight</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>任务列表</p>
+<ul>
+<li><input checked disabled type="checkbox"> @mentions, #refs, <a href>links</a>, <strong>formatting</strong>, and <del>tags</del> supported</li>
+<li><input checked disabled type="checkbox"> list syntax required (any unordered or ordered list supported)</li>
+<li><input checked disabled type="checkbox"> this is a complete item</li>
+<li><input disabled type="checkbox"> this is an incomplete item</li>
+</ul>
+<p>表格<br>First Header | Second Header<br>————-|————-<br>Content from cell 1 | Content from cell 2<br>Content in the first column | Content in the second column</p>
+<p>表情<br>:smile:<br>:fa-car:</p>
+<p>上标<br>30^th^</p>
+<p>下标<br>H<del>2</del>o</p>
+<p>脚注<br>Content [^1]<br>[^1]: Hi! This is a foot note</p>
+<p>缩略<br>_[HTML]: Hyper Text Markup Language<br>_[W3C]: World Wide Web Consortium<br>The HTML specification<br>is maintained by the W3C.</p>
+<p>标记<br>==marked==</p>
+<p>目录<br>[TOC]</p>
+<p>导入外部文件<br>@import “当前文件中的路径”</p>
+<p>设置图片<br>@import “1.jpg” {width=”300px” height=”200px” title=”图片的标题” alt=”我的 alt”}</p>
+<p>引用在线文件<br>@import “<a href="https://raw.githubusercontent.com/shd101wyy/markdown-preview-enhanced/master/LICENSE.md&quot;">https://raw.githubusercontent.com/shd101wyy/markdown-preview-enhanced/master/LICENSE.md&quot;</a></p>
+</h2>]]></content>
       <categories>
-          
-          <category> markdown </category>
-          
+        <category>markdown</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> markdown </tag>
-            
-            <tag> Latex </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>关于hexo的一些问题</title>
-      <link href="2020/05/28/%E5%85%B3%E4%BA%8Ehexo%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/"/>
-      <url>2020/05/28/%E5%85%B3%E4%BA%8Ehexo%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/</url>
-      
-        <content type="html"><![CDATA[<p>在使用hexo时的一些陷阱</p><blockquote><p>[我]的文章<br>{ 和 #不能连着用，生成hexo时会报错，可在之间加个空格解决</p></blockquote><a id="more"></a><p>命令</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo new </span><br><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo server</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure><p>在文章中使用<code>&lt;!--more--&gt;</code>可手动截断</p>]]></content>
-      
-      
+      <tags>
+        <tag>markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于hexo的一些问题</title>
+    <url>/2020/05/28/%E5%85%B3%E4%BA%8Ehexo%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>在使用hexo时的一些陷阱</p>
+<blockquote>
+<p>[我]的文章<br>{ 和 #不能连着用，生成hexo时会报错，可在之间加个空格解决</p>
+</blockquote>
+<a id="more"></a>
+
+<p>命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new </span><br><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo server</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>在文章中使用<code>&lt;!--more--&gt;</code>可手动截断</p>
+]]></content>
       <categories>
-          
-          <category> 问题 </category>
-          
+        <category>问题</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> hexo </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>markdown笔记</title>
-      <link href="2020/05/28/markdown%E7%AC%94%E8%AE%B0/"/>
-      <url>2020/05/28/markdown%E7%AC%94%E8%AE%B0/</url>
-      
-        <content type="html"><![CDATA[<p>学习markdown记录的一些笔记</p><p>ctrl+k v  预览<br>shift+enter 运行代码块</p><a id="more"></a><p>标题</p><h1 id="这是-一级标题"><a href="#这是-一级标题" class="headerlink" title="这是  一级标题"></a>这是 <h2> 一级标题</h2></h1><h2 id="这是-二级标题"><a href="#这是-二级标题" class="headerlink" title="这是  二级标题"></a>这是 <h2> 二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6><h1 id="这个标题有-1-个-id-my-id"><a href="#这个标题有-1-个-id-my-id" class="headerlink" title="这个标题有 1 个 id { #my_id}"></a>这个标题有 1 个 id { #my_id}</h1><h1 id="这个标题有-2-个-classes-class1-class2"><a href="#这个标题有-2-个-classes-class1-class2" class="headerlink" title="这个标题有 2 个 classes {.class1 .class2}"></a>这个标题有 2 个 classes {.class1 .class2}</h1><p>强调<br><em>这会是 斜体 的文字</em><br><em>这会是 斜体 的文字—</em><br><strong>这会是 粗体 的文字</strong><br><strong>这会是 粗体 的文字</strong><br><em>你也 <strong>组合</strong> 这些符号</em><br><del>这个文字将会被横线删除</del></p><p>列表<br>无序列表</p><ul><li>Item 1</li><li>Item 2<ul><li>Item 2a</li><li>Item 2b<br>有序列表</li></ul></li></ul><ol><li>Item 1</li><li>Item 2</li><li>Item 3<ol><li>Item 3a</li><li>Item 3b</li></ol></li></ol><p>添加图片(第一个是链接第二个直接显示)<br>！<a href="%E5%BD%93%E5%89%8D%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E8%B7%AF%E5%BE%84">口罩</a><br>Format: <img src="/2020/05/28/markdown%E7%AC%94%E8%AE%B0/%E5%BD%93%E5%89%8D%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E8%B7%AF%E5%BE%84" alt="Alt Text"></p><p>链接<br><a href="https://github.com/">https://github.com</a> - 自动生成！<br><a href="https://github.com/">Github</a></p><p>引用<br>正如 Kanye West 所说：</p><blockquote><p>We’re living the future so<br>the present is our past.</p></blockquote><p>分割线(记得中间要空格)<br>如下，三个或者更多的</p><hr><p>连字符</p><hr><p>星号</p><hr><p>下划线</p><p>行内代码<br>我觉得你应该在这里使用 <code>&lt;addr&gt;</code> 才对。</p><p>代码块</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">你可以在你的代码上面和</span><br><span class="line">下面添加&#96;&#96;&#96;来表示代码块</span><br></pre></td></tr></table></figure><p>语法高亮<br>你可以给你的代码块添加任何一种语言的语法高亮<br>例如，给代码添加ruby语言的语法高亮：</p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">&#x27;redcarpet&#x27;</span></span><br><span class="line">markdown = Redcarpet.new(<span class="string">&quot;Hello World!)</span></span><br><span class="line"><span class="string">puts markdown.to_html</span></span><br></pre></td></tr></table></figure><p>代码块class(MPE扩展的特性)<br>你可以给你的代码设置class。<br>例如，添加class1 class2 到一个代码块：</p><figure class="highlight javascript"><figcaption><span>&#123;.class1 .class2&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x,y</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x+y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>代码行数<br>添加line-numbers class 就可以了。</p><figure class="highlight javascript"><figcaption><span>&#123;.line-numbers&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x,y</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x+y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>高亮代码行数<br>添加<code>highlight</code>属性的方式来高亮代码行数</p><figure class="highlight javascript"><figcaption><span>&#123;highlight</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">``</span><span class="string">`</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>javascript &#123;highlight=<span class="number">10</span>-<span class="number">20</span>&#125;</span><br></pre></td></tr></table></figure><figure class="highlight javascript"><figcaption><span>&#123;highlight</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure><p>任务列表</p><ul><li><input checked disabled type="checkbox"> @mentions, #refs, <a href>links</a>, <strong>formatting</strong>, and <del>tags</del> supported</li><li><input checked disabled type="checkbox"> list syntax required (any unordered or ordered list supported)</li><li><input checked disabled type="checkbox"> this is a complete item</li><li><input disabled type="checkbox"> this is an incomplete item</li></ul><p>表格<br>First Header | Second Header<br>————-|————-<br>Content from cell 1 | Content from cell 2<br>Content in the first column | Content in the second column</p><p>表情<br>:smile:<br>:fa-car:</p><p>上标<br>30^th^</p><p>下标<br>H<del>2</del>o</p><p>脚注<br>Content [^1]<br>[^1]: Hi! This is a foot note</p><p>缩略<br>_[HTML]: Hyper Text Markup Language<br>_[W3C]: World Wide Web Consortium<br>The HTML specification<br>is maintained by the W3C.</p><p>标记<br>==marked==</p><p>目录<br>[TOC]</p><p>导入外部文件<br>@import “当前文件中的路径”</p><p>设置图片<br>@import “1.jpg” {width=”300px” height=”200px” title=”图片的标题” alt=”我的 alt”}</p><p>引用在线文件<br>@import “<a href="https://raw.githubusercontent.com/shd101wyy/markdown-preview-enhanced/master/LICENSE.md&quot;">https://raw.githubusercontent.com/shd101wyy/markdown-preview-enhanced/master/LICENSE.md&quot;</a></p></h2>]]></content>
-      
-      
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《深入理解计算机系统》笔记--第一章</title>
+    <url>/2020/06/06/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8B%E7%AC%94%E8%AE%B0--%E7%AC%AC%E4%B8%80%E7%AB%A0/</url>
+    <content><![CDATA[<p>最近读《深入理解计算机系统》打算记点笔记，特开一个分类写文也算是督促自己学习吧。</p>
+<a id="more"></a>
+<h2 id="TOC"><a href="#TOC" class="headerlink" title="[TOC]"></a>[TOC]</h2><h3 id="系统的硬件组成"><a href="#系统的硬件组成" class="headerlink" title="系统的硬件组成"></a>系统的硬件组成</h3><ol>
+<li>总线<br>贯穿整个整个系统的的是一组点资管道，称作总线。</li>
+<li>I/O设备<br><img src="/2020/06/06/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8B%E7%AC%94%E8%AE%B0--%E7%AC%AC%E4%B8%80%E7%AB%A0/1.png" alt="一个典型系统的硬件组成"></li>
+<li>主存<br>主存是一个临时存储设备，在处理器执行程序时用来存放程序和程序处理的数据，由一组动态随机存储器(DRAM)芯片组成。</li>
+<li>处理器<br>即中央处理单元CPU</li>
+</ol>
+<ul>
+<li>处理器的指令集构架和处理器的微体系结构区别：<br>&emsp;指令集构架描述的是每条机器代码指令的效果，而微体系结构描述的是处理器实际上是如何实现的。</li>
+</ul>
+<hr>
+<h3 id="高速缓存至关重要"><a href="#高速缓存至关重要" class="headerlink" title="高速缓存至关重要"></a>高速缓存至关重要</h3><p>&emsp;&emsp;根据机械原理，较大的存储设备要比较小的存储设备运行得慢，且快速设备的造价远高于同类的低速设备。因此系统设计者采用了更小更快的存储设备——高速缓存存储器(cache memory简称cache或高速缓存),作为暂时的集结趋于，存放处理器近期可能会需要的信息。</p>
+<hr>
+<h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>进程是操作系统对一个正在运行的程序的一种抽象。<br><strong>并发运行</strong>：一个进程的指令和另一个进程的指令是交错执行的。<br>多核处理器可同时执行多个程序。<br>操作系统实现这种交错执行的机制称为<strong>上下文切换</strong>。<br>由一个进程到另一个进程的转换是由操作系统的内核管理的。内核是系统管理全部进程所用代码和数据结构的集合。</p>
+<hr>
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>一个进程可由多个称为线程的执行单元组成</p>
+<hr>
+<h3 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h3><p>虚拟内存是一个抽象概念，它为每个进程提供了一个假象，即每个进程好像都在独占地使用主存，每个进程看到的内存都是一致的，称为虚拟地址空间。<br><img src="/2020/06/06/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8B%E7%AC%94%E8%AE%B0--%E7%AC%AC%E4%B8%80%E7%AB%A0/2.png" alt="linux进程的虚拟地址空间"></p>
+<hr>
+<h3 id="Amdahl定理"><a href="#Amdahl定理" class="headerlink" title="Amdahl定理"></a>Amdahl定理</h3><p>当对系统的某个部分加速时，其对系统整体性能的影响取决于该部分的重要性和加速程度。若系统执行某应用程序需要时间为$T_{old}$，假设系统某部分所需执行时间与该事件的比例为$a$，而该部分性能提升比例为$k$，即该部分初始所需时间为$aT_{old}$，现在所需时间为$(aT_{old})/k$。因此，总的执行时间应为$$T_{new}=(1-a)T_{old}+(aT_{old})/k=T_{old}[(1-a)+a/k]$$<br>由此，可计算出加速度比$S=T_{old}/T_{new}$为$$S=\frac{1}{(1-a)+a/k}$$<br><strong>综上：要想显著加速整个系统，必须提升全系统中相当大的部分的速度。</strong></p>
+<hr>
+<h3 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h3><p>并发：指一个同时具有多个活动的系统<br>并行：指用并发来使一个系统运行得更快</p>
+<ol>
+<li>线程级并发</li>
+<li>指令级并行</li>
+<li>单指令、多数据并行</li>
+</ol>
+]]></content>
       <categories>
-          
-          <category> markdown </category>
-          
+        <category>深入理解计算机系统</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> markdown </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-  
-  
+      <tags>
+        <tag>基础</tag>
+        <tag>读书笔记</tag>
+      </tags>
+  </entry>
 </search>
