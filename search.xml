@@ -261,6 +261,18 @@
       </tags>
   </entry>
   <entry>
+    <title>buglist</title>
+    <url>/2020/11/30/buglist/</url>
+    <content><![CDATA[<p>总结记录小bug以便后续查阅</p>
+<a id="more"></a>]]></content>
+      <categories>
+        <category>个人记录</category>
+      </categories>
+      <tags>
+        <tag>buglist</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>git命令</title>
     <url>/2020/06/28/git%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<p>仅以readme.txt为例</p>
@@ -391,25 +403,6 @@
       </tags>
   </entry>
   <entry>
-    <title>next中katex不显示的问题</title>
-    <url>/2020/05/29/next%E4%B8%ADkatex%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>经过一个上午的折腾终于整明白了怎么在hexo中用mathjax渲染。</p>
-<p>NexT 主题的 MathJax 插件默认是禁用的<br>在主题配置文件_config.yml中找到如下代码段</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Math Formulas Render Support</span><br><span class="line">math:</span><br><span class="line">  # Default (true) will load mathjax &#x2F; katex script on demand.</span><br><span class="line">  # That is it only render those page which has &#96;mathjax: true&#96; in Front-matter.</span><br><span class="line">  # If you set it to false, it will load mathjax &#x2F; katex srcipt EVERY PAGE.</span><br><span class="line">  per_page: true</span><br><span class="line"></span><br><span class="line">  # hexo-renderer-pandoc (or hexo-renderer-kramed) required for full MathJax support.</span><br><span class="line">  mathjax:</span><br><span class="line">    enable: true</span><br><span class="line">    # See: https:&#x2F;&#x2F;mhchem.github.io&#x2F;MathJax-mhchem&#x2F;</span><br><span class="line">    mhchem: true</span><br><span class="line"></span><br><span class="line">  # hexo-renderer-markdown-it-plus (or hexo-renderer-markdown-it with markdown-it-katex plugin) required for full Katex support.</span><br><span class="line">  katex:</span><br><span class="line">    enable: false</span><br><span class="line">    # See: https:&#x2F;&#x2F;github.com&#x2F;KaTeX&#x2F;KaTeX&#x2F;tree&#x2F;master&#x2F;contrib&#x2F;copy-tex</span><br><span class="line">    copy_tex: false</span><br></pre></td></tr></table></figure>
-<p>将对应的<code>enable</code>的值改为<code>true</code>即可启用 MathJax。<br>同时注意 per_page 上面的注释，注释表明了，MathJax 只渲染在文件前端注明 mathjax: true 字段的文章，例如：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">layout: hexo</span><br><span class="line">title: next中katex不显示的问题</span><br><span class="line">date: 2020-05-29 14:43:03</span><br><span class="line">tags: [hexo]</span><br><span class="line">categories: [问题]</span><br><span class="line">mathjax: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-<p>接下来就可以愉快的使用mathjax了~</p>
-]]></content>
-      <categories>
-        <category>问题</category>
-      </categories>
-      <tags>
-        <tag>Latex</tag>
-        <tag>hexo</tag>
-        <tag>Mathjax</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>pid笔记</title>
     <url>/2020/11/28/pid%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>今天智能车培训听完綦佬讲解pid体验良好，决定做下记录，顺便自己也正儿八经写篇关于pid的笔记。</p>
@@ -446,6 +439,25 @@
       <tags>
         <tag>pid</tag>
         <tag>智能车</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>next中katex不显示的问题</title>
+    <url>/2020/05/29/next%E4%B8%ADkatex%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>经过一个上午的折腾终于整明白了怎么在hexo中用mathjax渲染。</p>
+<p>NexT 主题的 MathJax 插件默认是禁用的<br>在主题配置文件_config.yml中找到如下代码段</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Math Formulas Render Support</span><br><span class="line">math:</span><br><span class="line">  # Default (true) will load mathjax &#x2F; katex script on demand.</span><br><span class="line">  # That is it only render those page which has &#96;mathjax: true&#96; in Front-matter.</span><br><span class="line">  # If you set it to false, it will load mathjax &#x2F; katex srcipt EVERY PAGE.</span><br><span class="line">  per_page: true</span><br><span class="line"></span><br><span class="line">  # hexo-renderer-pandoc (or hexo-renderer-kramed) required for full MathJax support.</span><br><span class="line">  mathjax:</span><br><span class="line">    enable: true</span><br><span class="line">    # See: https:&#x2F;&#x2F;mhchem.github.io&#x2F;MathJax-mhchem&#x2F;</span><br><span class="line">    mhchem: true</span><br><span class="line"></span><br><span class="line">  # hexo-renderer-markdown-it-plus (or hexo-renderer-markdown-it with markdown-it-katex plugin) required for full Katex support.</span><br><span class="line">  katex:</span><br><span class="line">    enable: false</span><br><span class="line">    # See: https:&#x2F;&#x2F;github.com&#x2F;KaTeX&#x2F;KaTeX&#x2F;tree&#x2F;master&#x2F;contrib&#x2F;copy-tex</span><br><span class="line">    copy_tex: false</span><br></pre></td></tr></table></figure>
+<p>将对应的<code>enable</code>的值改为<code>true</code>即可启用 MathJax。<br>同时注意 per_page 上面的注释，注释表明了，MathJax 只渲染在文件前端注明 mathjax: true 字段的文章，例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">layout: hexo</span><br><span class="line">title: next中katex不显示的问题</span><br><span class="line">date: 2020-05-29 14:43:03</span><br><span class="line">tags: [hexo]</span><br><span class="line">categories: [问题]</span><br><span class="line">mathjax: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>接下来就可以愉快的使用mathjax了~</p>
+]]></content>
+      <categories>
+        <category>问题</category>
+      </categories>
+      <tags>
+        <tag>Latex</tag>
+        <tag>hexo</tag>
+        <tag>Mathjax</tag>
       </tags>
   </entry>
   <entry>
@@ -507,6 +519,37 @@
       </categories>
       <tags>
         <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>技能树</title>
+    <url>/2020/11/30/%E6%8A%80%E8%83%BD%E6%A0%91/</url>
+    <content><![CDATA[<p>以此作为个人技能的记录梳理</p>
+<a id="more"></a>
+
+<p>python: numpy pandas matplotlib turtle</p>
+<p>机器学习</p>
+<p>AD</p>
+<p>solidworks</p>
+<p>焊接</p>
+<p>pid</p>
+<p>C</p>
+<p>C++</p>
+<p>hexo博客</p>
+<p>算法</p>
+<p>markdown</p>
+<p>git</p>
+<p>latex</p>
+<p>MFC</p>
+<p>第一阶段总结：</p>
+<p>&emsp;&emsp;重要的是应用而不是花里胡哨的工具，发现自己时常对一些新奇的小工具感兴趣，些许忽视了对内在知识的学习，真正算得上硬核的技能并不多。👎</p>
+<p>&emsp;&emsp;下一阶段应更注重对知识本身的学习。</p>
+]]></content>
+      <categories>
+        <category>个人记录</category>
+      </categories>
+      <tags>
+        <tag>技能</tag>
       </tags>
   </entry>
   <entry>
