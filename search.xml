@@ -261,6 +261,50 @@
       </tags>
   </entry>
   <entry>
+    <title>matlab音频信号处理</title>
+    <url>/2021/03/15/audio_signal_processing/</url>
+    <content><![CDATA[<p>做了个matlab的音频处理小作业，顺手写个教程</p>
+<a id="more"></a>
+<h2 id="Matlab-音频信号处理"><a href="#Matlab-音频信号处理" class="headerlink" title="Matlab 音频信号处理"></a>Matlab 音频信号处理</h2><h3 id="一、读取音频文件"><a href="#一、读取音频文件" class="headerlink" title="一、读取音频文件"></a>一、读取音频文件</h3><p>函数名：$audioread$</p>
+<p>调用格式：</p>
+<ul>
+<li>[y,Fs] = audioread(filename)</li>
+<li>[y,Fs] = audioread(filename,samples)</li>
+</ul>
+<p>使用方法：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">[y,Fs]=audioread(<span class="string">&#x27;C:\Users\user\Desktop\audio_signal_processing\demo.mp4&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>Fs</strong>：采样频率，1秒内对连续的音频信号取的点的个数<br><strong>y</strong>：输出的音频数字信号，默认是n行2列，其中2的意思是，这个音频信号是两个声道的，n的值等于该音频信号的时长乘采样频率Fs。<br><strong>samples</strong> ：音频读取区域，samples其实是一个数组，意思就是一段音频比如是1分钟，但是我只需要读取一部分，比如0-20s，20s-40s，40s-最后</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">[y,Fs]=audioread(<span class="string">&#x27;demo.mp4&#x27;</span>); <span class="comment">%读取音频</span></span><br><span class="line">sound(y,Fs); <span class="comment">%播放音频</span></span><br><span class="line">clear sound; <span class="comment">%停止播放</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="二、倍乘信号"><a href="#二、倍乘信号" class="headerlink" title="二、倍乘信号"></a>二、倍乘信号</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">sound(<span class="number">2</span>*y,Fs) <span class="comment">%两倍声音放大</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="三、相加"><a href="#三、相加" class="headerlink" title="三、相加"></a>三、相加</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%截取两端音频</span></span><br><span class="line">samples1 = [<span class="number">1</span>,<span class="number">10</span>*Fs];</span><br><span class="line">samples2 = [<span class="number">10</span>*Fs,<span class="number">20</span>*Fs];</span><br><span class="line">[y1,Fs]=audioread(<span class="string">&#x27;demo.mp4&#x27;</span>,samples1);</span><br><span class="line">[y2,Fs]=audioread(<span class="string">&#x27;demo.mp4&#x27;</span>,samples2);</span><br><span class="line"><span class="comment">%混音处理</span></span><br><span class="line">[m,n]=<span class="built_in">size</span>(y1);<span class="comment">%size取矩阵的行列数</span></span><br><span class="line">[m0,n0]=<span class="built_in">size</span>(y2);</span><br><span class="line">a=<span class="built_in">zeros</span>(<span class="built_in">abs</span>(m-m0),n);<span class="comment">%两矩阵行数差为零矩阵行数</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">length</span>(y1)&lt;<span class="built_in">length</span>(y2)</span><br><span class="line">     z=[y1;a];</span><br><span class="line">     y3=z+y2;<span class="comment">%两个矩阵行数一样才能相加，所以要补零</span></span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">     z=[y2;a];</span><br><span class="line">     y3=z+y1;<span class="comment">%y1和z1中长的那个不变，短的那个补零</span></span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">sound(y3,Fs)</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、相乘"><a href="#四、相乘" class="headerlink" title="四、相乘"></a>四、相乘</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%截取两端音频</span></span><br><span class="line">samples1 = [<span class="number">1</span>,<span class="number">10</span>*Fs];</span><br><span class="line">samples2 = [<span class="number">10</span>*Fs,<span class="number">20</span>*Fs];</span><br><span class="line">[y1,Fs]=audioread(<span class="string">&#x27;demo.mp4&#x27;</span>,samples1);</span><br><span class="line">[y2,Fs]=audioread(<span class="string">&#x27;demo.mp4&#x27;</span>,samples2);</span><br><span class="line"><span class="comment">%混音处理</span></span><br><span class="line">[m,n]=<span class="built_in">size</span>(y1);<span class="comment">%size取矩阵的行列数</span></span><br><span class="line">[m0,n0]=<span class="built_in">size</span>(y2);</span><br><span class="line">a=<span class="built_in">zeros</span>(<span class="built_in">abs</span>(m-m0),n);<span class="comment">%两矩阵行数差为零矩阵行数</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">length</span>(y1)&lt;<span class="built_in">length</span>(y2)</span><br><span class="line">     z=[y1;a];</span><br><span class="line">     y3=z.*y2;<span class="comment">%两个矩阵点乘</span></span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">     z=[y2;a];</span><br><span class="line">     y3=z.*y1;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line">sound(y3,Fs)</span><br></pre></td></tr></table></figure>
+
+<h3 id="五、微分"><a href="#五、微分" class="headerlink" title="五、微分"></a>五、微分</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">dy = diff(y); <span class="comment">%差分</span></span><br><span class="line">sound(dy,Fs);</span><br></pre></td></tr></table></figure>
+
+<h3 id="六、积分"><a href="#六、积分" class="headerlink" title="六、积分"></a>六、积分</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">y2 = cumtrapz(y); <span class="comment">%梯形法积分</span></span><br><span class="line">sound(y2,Fs);</span><br></pre></td></tr></table></figure>
+
+<h3 id="七、尺度"><a href="#七、尺度" class="headerlink" title="七、尺度"></a>七、尺度</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">sound(y,<span class="number">2</span>*Fs);     <span class="comment">%二倍速播放声音</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="八、反褶"><a href="#八、反褶" class="headerlink" title="八、反褶"></a>八、反褶</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">L = <span class="built_in">size</span>(m,<span class="number">1</span>);<span class="comment">%得到语音总共取到的点的个数</span></span><br><span class="line">n = <span class="number">1</span>:L;</span><br><span class="line">y2 = y(L-n+<span class="number">1</span>,<span class="number">1</span>); <span class="comment">%实现语音信号反褶并平移到原点处</span></span><br><span class="line">sound(y2,Fs);</span><br></pre></td></tr></table></figure>
+
+<h3 id="九、平移"><a href="#九、平移" class="headerlink" title="九、平移"></a>九、平移</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a&#x3D;zeros(100000,2); %零矩阵</span><br><span class="line">y2 &#x3D; [a;y];</span><br><span class="line">sound(y2,Fs);</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>matlab</category>
+      </categories>
+      <tags>
+        <tag>matlab</tag>
+        <tag>信号与系统</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>buglist</title>
     <url>/2020/11/30/buglist/</url>
     <content><![CDATA[<p>总结记录小bug以便后续查阅</p>
@@ -403,6 +447,25 @@
       </tags>
   </entry>
   <entry>
+    <title>next中katex不显示的问题</title>
+    <url>/2020/05/29/next%E4%B8%ADkatex%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>经过一个上午的折腾终于整明白了怎么在hexo中用mathjax渲染。</p>
+<p>NexT 主题的 MathJax 插件默认是禁用的<br>在主题配置文件_config.yml中找到如下代码段</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Math Formulas Render Support</span><br><span class="line">math:</span><br><span class="line">  # Default (true) will load mathjax &#x2F; katex script on demand.</span><br><span class="line">  # That is it only render those page which has &#96;mathjax: true&#96; in Front-matter.</span><br><span class="line">  # If you set it to false, it will load mathjax &#x2F; katex srcipt EVERY PAGE.</span><br><span class="line">  per_page: true</span><br><span class="line"></span><br><span class="line">  # hexo-renderer-pandoc (or hexo-renderer-kramed) required for full MathJax support.</span><br><span class="line">  mathjax:</span><br><span class="line">    enable: true</span><br><span class="line">    # See: https:&#x2F;&#x2F;mhchem.github.io&#x2F;MathJax-mhchem&#x2F;</span><br><span class="line">    mhchem: true</span><br><span class="line"></span><br><span class="line">  # hexo-renderer-markdown-it-plus (or hexo-renderer-markdown-it with markdown-it-katex plugin) required for full Katex support.</span><br><span class="line">  katex:</span><br><span class="line">    enable: false</span><br><span class="line">    # See: https:&#x2F;&#x2F;github.com&#x2F;KaTeX&#x2F;KaTeX&#x2F;tree&#x2F;master&#x2F;contrib&#x2F;copy-tex</span><br><span class="line">    copy_tex: false</span><br></pre></td></tr></table></figure>
+<p>将对应的<code>enable</code>的值改为<code>true</code>即可启用 MathJax。<br>同时注意 per_page 上面的注释，注释表明了，MathJax 只渲染在文件前端注明 mathjax: true 字段的文章，例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">layout: hexo</span><br><span class="line">title: next中katex不显示的问题</span><br><span class="line">date: 2020-05-29 14:43:03</span><br><span class="line">tags: [hexo]</span><br><span class="line">categories: [问题]</span><br><span class="line">mathjax: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>接下来就可以愉快的使用mathjax了~</p>
+]]></content>
+      <categories>
+        <category>问题</category>
+      </categories>
+      <tags>
+        <tag>Latex</tag>
+        <tag>hexo</tag>
+        <tag>Mathjax</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>pid笔记</title>
     <url>/2020/11/28/pid%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>今天智能车培训听完綦佬讲解pid体验良好，决定做下记录，顺便自己也正儿八经写篇关于pid的笔记。</p>
@@ -439,25 +502,6 @@
       <tags>
         <tag>pid</tag>
         <tag>智能车</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>next中katex不显示的问题</title>
-    <url>/2020/05/29/next%E4%B8%ADkatex%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>经过一个上午的折腾终于整明白了怎么在hexo中用mathjax渲染。</p>
-<p>NexT 主题的 MathJax 插件默认是禁用的<br>在主题配置文件_config.yml中找到如下代码段</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Math Formulas Render Support</span><br><span class="line">math:</span><br><span class="line">  # Default (true) will load mathjax &#x2F; katex script on demand.</span><br><span class="line">  # That is it only render those page which has &#96;mathjax: true&#96; in Front-matter.</span><br><span class="line">  # If you set it to false, it will load mathjax &#x2F; katex srcipt EVERY PAGE.</span><br><span class="line">  per_page: true</span><br><span class="line"></span><br><span class="line">  # hexo-renderer-pandoc (or hexo-renderer-kramed) required for full MathJax support.</span><br><span class="line">  mathjax:</span><br><span class="line">    enable: true</span><br><span class="line">    # See: https:&#x2F;&#x2F;mhchem.github.io&#x2F;MathJax-mhchem&#x2F;</span><br><span class="line">    mhchem: true</span><br><span class="line"></span><br><span class="line">  # hexo-renderer-markdown-it-plus (or hexo-renderer-markdown-it with markdown-it-katex plugin) required for full Katex support.</span><br><span class="line">  katex:</span><br><span class="line">    enable: false</span><br><span class="line">    # See: https:&#x2F;&#x2F;github.com&#x2F;KaTeX&#x2F;KaTeX&#x2F;tree&#x2F;master&#x2F;contrib&#x2F;copy-tex</span><br><span class="line">    copy_tex: false</span><br></pre></td></tr></table></figure>
-<p>将对应的<code>enable</code>的值改为<code>true</code>即可启用 MathJax。<br>同时注意 per_page 上面的注释，注释表明了，MathJax 只渲染在文件前端注明 mathjax: true 字段的文章，例如：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">layout: hexo</span><br><span class="line">title: next中katex不显示的问题</span><br><span class="line">date: 2020-05-29 14:43:03</span><br><span class="line">tags: [hexo]</span><br><span class="line">categories: [问题]</span><br><span class="line">mathjax: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-<p>接下来就可以愉快的使用mathjax了~</p>
-]]></content>
-      <categories>
-        <category>问题</category>
-      </categories>
-      <tags>
-        <tag>Latex</tag>
-        <tag>hexo</tag>
-        <tag>Mathjax</tag>
       </tags>
   </entry>
   <entry>
