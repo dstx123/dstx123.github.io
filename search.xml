@@ -29,7 +29,7 @@
 
 <h3 id="七、尺度"><a href="#七、尺度" class="headerlink" title="七、尺度"></a>七、尺度</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">sound(y,<span class="number">2</span>*Fs);     <span class="comment">%二倍速播放声音</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="八、反褶"><a href="#八、反褶" class="headerlink" title="八、反褶"></a>八、反褶</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">L = <span class="built_in">size</span>(m,<span class="number">1</span>);<span class="comment">%得到语音总共取到的点的个数</span></span><br><span class="line">n = <span class="number">1</span>:L;</span><br><span class="line">y2 = y(L-n+<span class="number">1</span>,<span class="number">1</span>); <span class="comment">%实现语音信号反褶并平移到原点处</span></span><br><span class="line">sound(y2,Fs);</span><br></pre></td></tr></table></figure>
+<h3 id="八、反褶"><a href="#八、反褶" class="headerlink" title="八、反褶"></a>八、反褶</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">L = <span class="built_in">size</span>(y,<span class="number">1</span>);<span class="comment">%得到语音总共取到的点的个数</span></span><br><span class="line">n = <span class="number">1</span>:L;</span><br><span class="line">y2 = y(L-n+<span class="number">1</span>,<span class="number">1</span>); <span class="comment">%实现语音信号反褶并平移到原点处</span></span><br><span class="line">sound(y2,Fs);</span><br></pre></td></tr></table></figure>
 
 <h3 id="九、平移"><a href="#九、平移" class="headerlink" title="九、平移"></a>九、平移</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a&#x3D;zeros(100000,2); %零矩阵</span><br><span class="line">y2 &#x3D; [a;y];</span><br><span class="line">sound(y2,Fs);</span><br></pre></td></tr></table></figure>
 
