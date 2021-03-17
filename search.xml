@@ -297,7 +297,7 @@
 
 <h3 id="五、微分"><a href="#五、微分" class="headerlink" title="五、微分"></a>五、微分</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">dy = diff(y); <span class="comment">%差分</span></span><br><span class="line">sound(dy,Fs);</span><br></pre></td></tr></table></figure>
 
-<h3 id="六、积分"><a href="#六、积分" class="headerlink" title="六、积分"></a>六、积分</h3><p><img src="/2021/03/15/audio_signal_processing/Users\user\AppData\Roaming\Typora\typora-user-images\image-20210317230505897.png" alt="image-20210317230505897"></p>
+<h3 id="六、积分"><a href="#六、积分" class="headerlink" title="六、积分"></a>六、积分</h3><p><img src="/2021/03/15/audio_signal_processing/1.png" alt="积分"></p>
 <figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">y2 = cumtrapz(y); <span class="comment">%梯形法积分</span></span><br><span class="line">sound(y2,Fs);</span><br></pre></td></tr></table></figure>
 
 <h3 id="七、尺度"><a href="#七、尺度" class="headerlink" title="七、尺度"></a>七、尺度</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">sound(y,<span class="number">2</span>*Fs);     <span class="comment">%二倍速播放声音</span></span><br></pre></td></tr></table></figure>
