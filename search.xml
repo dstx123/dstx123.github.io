@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>git命令</title>
+    <url>/2020/06/28/git%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>仅以readme.txt为例</p>
+<a id="more"></a>
+<h4 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h4><p><code>git init</code> 初始化目录为git仓库<br><code>git add readme.txt</code> 添加文件到暂存区<br><code>git add .</code> 添加所有<br><code>git commit -m &quot;wrote a readme file&quot;</code> 将暂存区中的提交并说明</p>
+<h4 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h4><p><code>git status</code> 查看仓库当前状态<br><code>git diff readme.txt</code> 查看具体修改内容<br><code>git log</code> 查看提交日志<br><code>git log --pretty=oneline</code> 精简信息<br><code>git reset --hard HEAD^</code> 回退到上一个版本（HEAD表示当前版本，HEAD^^表示上上一个版本，HEAD~100表示上100个版本）<br><code>cat readme.txt</code> 查看文件内容</p>
+<p><code>git reset --hard 1094a</code> 回退到版本号为1094a的版本<br><code>git reflog</code> 查看命令历史<br><code>git checkout -- readme.txt</code> 撤回对工作区的修改<br><code>git reset HEAD readme.txt</code> 撤销暂存区的修改重新放回工作区（然后再用上一条指令）</p>
+<p><code>rm readme.txt</code> 删除工作区文件<br><code>git rm readme.txt</code> 删除版本库<br><code>git commit -m &quot;delete readme.txt</code> 提交<br><code>git checkout -- readme.txt</code>从版本库中恢复删除的</p>
+<h4 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h4><p><code>git remote add origin git@github.com:dstx123/仓库名.git</code> 关联远程仓库<br><em>如果出现错误提示：fatal: remote origin already exists.则使用命令 <code>git remote rm origin</code>和 <code>git remote add origin</code></em><br><code>git push -u origin master</code> 第一次把本地库的master分支推送到远程库上（-u加上后也会关联其他分支）<br><code>git push origin master</code> 后来推送</p>
+<p><code>git clone git@github.com:dstx123/仓库名.git</code> 克隆一个本地库</p>
+<h4 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h4><p><code>git checkout -b dev</code> 创建并切换到dev分支<br>这条命令相当于<code>git branch dev</code> 和 <code>git checkout dev</code>两条命令（创建和切换）<br><code>git branch</code> 查看当前分支<br><code>git checkout master</code> 切换到master分支<br><code>git merge dev</code> 将dev分支合并到master分支上<br><code>git branch -d dev</code> 合并完成后删除dev分支<br><code>git switch -c dev</code> 创建并切换到dev分支<br><code>git switch master</code> 切换到master分支<br>分支合并冲突时手动修改<br><code>git log --graph --pretty=oneline --abbrev-commit</code>查看分支合并图</p>
+<p>git合并分支时采用fast forward模式，这种模式看不出曾经做过合并，在删除分支后，会丢失分支信息，故采用<code>git merge --no-ff -m &quot;merge with no-ff&quot; dev</code> 的指令合并并评论</p>
+<p><code>git stash</code> 存储当前工作（使用后工作区干净，可执行其他分支操作）<br><code>git stash list</code> 查看刚刚的工作现场<br><code>git stash pop</code>  恢复并删除刚刚存的stash内容<br><code>git stash apply</code> 恢复但不删除刚刚的stash内容<br>dev分支是早期从mster上分出来的，所以如果刚刚对master分支修改了，此时也需要对dev分支修改。<br><code>git cherry-pick 4c805e2</code> 用之前修改的版本号直接复制master的修改到dev<br><code>git branch -D feature</code>删除还未合并的feature分支<br><code>git rebase</code> 把分叉的历史提交记录整理成一条直线</p>
+<h4 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a>标签管理</h4><p><code>git checkout master</code> 先切换到要打标签的分支上<br><code>git tag v1.0</code>打上一个v1.0的标签<br><code>git tag</code> 查看所有标签（标签不是按时间顺序的，是按字母顺序）<br><code>git tag v0.9 f52c633</code> 打到指定版本号的commit上（默认打到最新提交的commit上）<br><code>git show v0.9</code>查看标签信息<br><code>git tag -a v0.1 -m &quot;version 0.1 released&quot; 1094adb</code> 创建带有说明的标签（<code>git show v0.1</code>即可查看）<br><code>git tag -d v0.1</code>  删除标签<br><code>git push origin v1.0</code> 推送某个标签到远程<br><code>git push origin --tags</code> 推送所有尚未推送的本地标签<br><em>如果要删除远程标签</em></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git tag -d v0.9 &#x2F;&#x2F;先删除本地的标签</span><br><span class="line">git push origin : refs&#x2F;tags&#x2F;v0.9  &#x2F;&#x2F;再远程删除</span><br><span class="line">&#x2F;&#x2F;refs&#x2F;tags&#x2F; 是固定的</span><br></pre></td></tr></table></figure>
+
+<p>最后附上一张Git Cheat Sheet<br><a href="https://gitee.com/liaoxuefeng/learn-java/raw/master/teach/git-cheatsheet.pdf">Git Cheat Sheet</a></p>
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Latex笔记</title>
     <url>/2020/05/29/Latex%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>[TOC]</p>
@@ -261,10 +287,39 @@
       </tags>
   </entry>
   <entry>
+    <title>hexo迁移记录</title>
+    <url>/2020/11/20/hexo%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>由于前段时间将电脑格式化后hexo本地配置全部丢失，重新配置hexo又比较繁琐，故记录一下这次hexo迁移方法</p>
+<a id="more"></a>
+<ol>
+<li>执行<code>hexo init</code>后从原博客文件中复制替换以下文件(夹)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">_config.yml</span><br><span class="line">source</span><br><span class="line">themes</span><br></pre></td></tr></table></figure>
+执行<code>hexo generate</code>和<code>hexo server</code>后可本地预览博客</li>
+<li>打开cmd执行<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;Github的注册邮箱地址&quot;</span><br></pre></td></tr></table></figure>
+一路enter后得到一下信息<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Your public key has been saved in &#x2F;c&#x2F;Users&#x2F;user&#x2F;.ssh&#x2F;id_rsa.pub.</span><br></pre></td></tr></table></figure>
+找到该文件，打开复制里面的所有内容，然后进入github找到New SSH key ——Title：blog —— Key：输入刚才复制的—— Add SSH key</li>
+<li><code>hexo deploy</code>收工</li>
+</ol>
+]]></content>
+      <categories>
+        <category>问题</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>buglist</title>
     <url>/2020/11/30/buglist/</url>
     <content><![CDATA[<p>总结记录小bug以便后续查阅</p>
-<a id="more"></a>]]></content>
+<a id="more"></a>
+<h3 id="关于单片机复位后可能出现死机"><a href="#关于单片机复位后可能出现死机" class="headerlink" title="关于单片机复位后可能出现死机"></a>关于单片机复位后可能出现死机</h3><ol>
+<li>电池供电不稳导致单片机死机</li>
+<li>单片机自身设计缺陷<br>针对沁恒chv103R8T6，可带电按reset键重启（断电重启无效）<h3 id="关于编码器读数不正常"><a href="#关于编码器读数不正常" class="headerlink" title="关于编码器读数不正常"></a>关于编码器读数不正常</h3></li>
+<li>针对带方向输出的编码器复位后正负值随机，由于龙邱库有缺陷，可自己增加读取电平判断正负方向。</li>
+<li>有可能编码器和电机接口不对应导致读数不正常</li>
+<li>上电编码器读数高于真实值，由于编码器增速过快直接超调严重</li>
+</ol>
+]]></content>
       <categories>
         <category>个人记录</category>
       </categories>
@@ -314,53 +369,6 @@
       <tags>
         <tag>matlab</tag>
         <tag>信号与系统</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git命令</title>
-    <url>/2020/06/28/git%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<p>仅以readme.txt为例</p>
-<a id="more"></a>
-<h4 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h4><p><code>git init</code> 初始化目录为git仓库<br><code>git add readme.txt</code> 添加文件到暂存区<br><code>git add .</code> 添加所有<br><code>git commit -m &quot;wrote a readme file&quot;</code> 将暂存区中的提交并说明</p>
-<h4 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h4><p><code>git status</code> 查看仓库当前状态<br><code>git diff readme.txt</code> 查看具体修改内容<br><code>git log</code> 查看提交日志<br><code>git log --pretty=oneline</code> 精简信息<br><code>git reset --hard HEAD^</code> 回退到上一个版本（HEAD表示当前版本，HEAD^^表示上上一个版本，HEAD~100表示上100个版本）<br><code>cat readme.txt</code> 查看文件内容</p>
-<p><code>git reset --hard 1094a</code> 回退到版本号为1094a的版本<br><code>git reflog</code> 查看命令历史<br><code>git checkout -- readme.txt</code> 撤回对工作区的修改<br><code>git reset HEAD readme.txt</code> 撤销暂存区的修改重新放回工作区（然后再用上一条指令）</p>
-<p><code>rm readme.txt</code> 删除工作区文件<br><code>git rm readme.txt</code> 删除版本库<br><code>git commit -m &quot;delete readme.txt</code> 提交<br><code>git checkout -- readme.txt</code>从版本库中恢复删除的</p>
-<h4 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h4><p><code>git remote add origin git@github.com:dstx123/仓库名.git</code> 关联远程仓库<br><em>如果出现错误提示：fatal: remote origin already exists.则使用命令 <code>git remote rm origin</code>和 <code>git remote add origin</code></em><br><code>git push -u origin master</code> 第一次把本地库的master分支推送到远程库上（-u加上后也会关联其他分支）<br><code>git push origin master</code> 后来推送</p>
-<p><code>git clone git@github.com:dstx123/仓库名.git</code> 克隆一个本地库</p>
-<h4 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h4><p><code>git checkout -b dev</code> 创建并切换到dev分支<br>这条命令相当于<code>git branch dev</code> 和 <code>git checkout dev</code>两条命令（创建和切换）<br><code>git branch</code> 查看当前分支<br><code>git checkout master</code> 切换到master分支<br><code>git merge dev</code> 将dev分支合并到master分支上<br><code>git branch -d dev</code> 合并完成后删除dev分支<br><code>git switch -c dev</code> 创建并切换到dev分支<br><code>git switch master</code> 切换到master分支<br>分支合并冲突时手动修改<br><code>git log --graph --pretty=oneline --abbrev-commit</code>查看分支合并图</p>
-<p>git合并分支时采用fast forward模式，这种模式看不出曾经做过合并，在删除分支后，会丢失分支信息，故采用<code>git merge --no-ff -m &quot;merge with no-ff&quot; dev</code> 的指令合并并评论</p>
-<p><code>git stash</code> 存储当前工作（使用后工作区干净，可执行其他分支操作）<br><code>git stash list</code> 查看刚刚的工作现场<br><code>git stash pop</code>  恢复并删除刚刚存的stash内容<br><code>git stash apply</code> 恢复但不删除刚刚的stash内容<br>dev分支是早期从mster上分出来的，所以如果刚刚对master分支修改了，此时也需要对dev分支修改。<br><code>git cherry-pick 4c805e2</code> 用之前修改的版本号直接复制master的修改到dev<br><code>git branch -D feature</code>删除还未合并的feature分支<br><code>git rebase</code> 把分叉的历史提交记录整理成一条直线</p>
-<h4 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a>标签管理</h4><p><code>git checkout master</code> 先切换到要打标签的分支上<br><code>git tag v1.0</code>打上一个v1.0的标签<br><code>git tag</code> 查看所有标签（标签不是按时间顺序的，是按字母顺序）<br><code>git tag v0.9 f52c633</code> 打到指定版本号的commit上（默认打到最新提交的commit上）<br><code>git show v0.9</code>查看标签信息<br><code>git tag -a v0.1 -m &quot;version 0.1 released&quot; 1094adb</code> 创建带有说明的标签（<code>git show v0.1</code>即可查看）<br><code>git tag -d v0.1</code>  删除标签<br><code>git push origin v1.0</code> 推送某个标签到远程<br><code>git push origin --tags</code> 推送所有尚未推送的本地标签<br><em>如果要删除远程标签</em></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git tag -d v0.9 &#x2F;&#x2F;先删除本地的标签</span><br><span class="line">git push origin : refs&#x2F;tags&#x2F;v0.9  &#x2F;&#x2F;再远程删除</span><br><span class="line">&#x2F;&#x2F;refs&#x2F;tags&#x2F; 是固定的</span><br></pre></td></tr></table></figure>
-
-<p>最后附上一张Git Cheat Sheet<br><a href="https://gitee.com/liaoxuefeng/learn-java/raw/master/teach/git-cheatsheet.pdf">Git Cheat Sheet</a></p>
-]]></content>
-      <categories>
-        <category>git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo迁移记录</title>
-    <url>/2020/11/20/hexo%E8%BF%81%E7%A7%BB%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<p>由于前段时间将电脑格式化后hexo本地配置全部丢失，重新配置hexo又比较繁琐，故记录一下这次hexo迁移方法</p>
-<a id="more"></a>
-<ol>
-<li>执行<code>hexo init</code>后从原博客文件中复制替换以下文件(夹)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">_config.yml</span><br><span class="line">source</span><br><span class="line">themes</span><br></pre></td></tr></table></figure>
-执行<code>hexo generate</code>和<code>hexo server</code>后可本地预览博客</li>
-<li>打开cmd执行<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;Github的注册邮箱地址&quot;</span><br></pre></td></tr></table></figure>
-一路enter后得到一下信息<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Your public key has been saved in &#x2F;c&#x2F;Users&#x2F;user&#x2F;.ssh&#x2F;id_rsa.pub.</span><br></pre></td></tr></table></figure>
-找到该文件，打开复制里面的所有内容，然后进入github找到New SSH key ——Title：blog —— Key：输入刚才复制的—— Add SSH key</li>
-<li><code>hexo deploy</code>收工</li>
-</ol>
-]]></content>
-      <categories>
-        <category>问题</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -466,6 +474,45 @@
       </tags>
   </entry>
   <entry>
+    <title>pid笔记</title>
+    <url>/2020/11/28/pid%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>今天智能车培训听完綦佬讲解pid体验良好，决定做下记录，顺便自己也正儿八经写篇关于pid的笔记。</p>
+<a id="more"></a>
+
+<h4 id="一、PID基础"><a href="#一、PID基础" class="headerlink" title="一、PID基础"></a>一、PID基础</h4><p><strong>1.1 控制系统的框图</strong></p>
+<ul>
+<li>执行器</li>
+<li>传感器</li>
+<li>控制器<br><img src="/2020/11/28/pid%E7%AC%94%E8%AE%B0/1.png" alt="控制系统的框图"></li>
+</ul>
+<p><strong>1.2 控制器的设计</strong></p>
+<p><strong><em>1.2.1 on-off控制</em></strong></p>
+<p>&emsp;&emsp;比如我们举个烧水壶加热到60℃的例子，仅仅控制电热丝的通断可实现on-off控制，即当温度小于60℃时通，大于60℃时断，这样便可实现简单的控制。<br>&emsp;&emsp;这样的设计虽然简单但是这样存在一定的缺陷：频繁开关会损伤执行器的寿命。</p>
+<p><strong><em>1.2.2 带死区的on-off控制</em></strong></p>
+<p>&emsp;&emsp;即在1.2.1的基础上，假如并不需要控制水温60℃，而是存在一定的死区，如50℃-70℃都可以，则此时温度小于50℃时通，大于70℃时断。<br>&emsp;&emsp;这样减少了开关通断的频率从而提高了使用寿命。</p>
+<p><strong><em>1.2.3 相对连续的控制器–P控制(Proportion)</em></strong></p>
+<p>&emsp;&emsp;看了上述的两种控制器，我们不由得思考是否存在一种控制器能同时相对精准的控制温度，同时又能减少开关的频繁通断。<br>&emsp;&emsp;由此我们引出了相对连续的控制器。与之相应的也应该有相对连续的传感器。</p>
+<p>&emsp;&emsp;我们记当前值$Z$与预期值$X$的偏差为$error$，即$$error=X-Z$$</p>
+<p>于是输出值$out=K_c*error$ ，其中$K_c$为比例系数</p>
+<p>当$error$减小时，$out$也随之减小</p>
+<p>通过error值我们便可以用占空比来得到相对连续的控制量。</p>
+<p>那么这样是否存在问题呢？<br>&emsp;&emsp;我们可以看到当Z与X相等时，error值则为0，即停止输出，当Z小于X时再输出。从一个长的时间跨度来看输出的平均值便小于了预期值，即存在稳态误差。<br>&emsp;&emsp;另外，我们还要注意$K_c$值不能设的太大，否则一个很小的误差便会引起系统很大的改变，于是误差便会越来越大(发散系统)。</p>
+<p><strong><em>1.2.4 P-I控制 (比例-积分) (Proportion-Integration)</em></strong></p>
+<p>为减小稳态误差，我们引入了积分量<br>$$out=K_c(e(t)+\frac{1}{T_i}\int e(t)dt)$$<br>其中$\frac{1}{T_i}$为积分时间常数，$\frac{1}{T_i}\int e(t)dt$为耗散<br>这样又是否已经可以很好的控制系统了呢？<br>我们思考这样两种情况：<br><img src="/2020/11/28/pid%E7%AC%94%E8%AE%B0/2.png" alt="D的引入"></p>
+<p>可以看到左图的当前值是趋向于预期值的，而右图的当前值是远离期望值的，对于P-I控制来说他们输出的out值却是一样的，对于这样的情况这样的控制策略显然并不好。</p>
+<p><strong><em>1.2.4 P-I-D控制 (比例-积分-微分) (Proportion-Integration-Derivation)</em></strong></p>
+<p>于是我们引入微分项<br>$$out=K_c\Big(e(t)+\frac{1}{T_i}\int e(t)dt+T_d\frac{de(t)}{dt}\Big)$$<br>这里当$K_c$变化时，PID三项均会变化，于是我们引入一种更实用的写法<br>$$out=K_pe(t)+K_i\int e(t)dt+K_d\frac{de(t)}{dt}$$<br>只需改变$K_p$、$K_i$、$K_d$即可分别控制PID三项</p>
+<h4 id="二、PID调参"><a href="#二、PID调参" class="headerlink" title="二、PID调参"></a>二、PID调参</h4><h4 id="三、PID理论证明"><a href="#三、PID理论证明" class="headerlink" title="三、PID理论证明"></a>三、PID理论证明</h4><h4 id="四、待定"><a href="#四、待定" class="headerlink" title="四、待定"></a>四、待定</h4><p><strong>咕咕咕咕咕咕咕咕</strong></p>
+]]></content>
+      <categories>
+        <category>智能车</category>
+      </categories>
+      <tags>
+        <tag>pid</tag>
+        <tag>智能车</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>matlab图片信号处理</title>
     <url>/2021/03/16/picture_signal_processing/</url>
     <content><![CDATA[<p>图片信号处理教程也附上</p>
@@ -508,66 +555,6 @@
       <tags>
         <tag>matlab</tag>
         <tag>信号与系统</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>pid笔记</title>
-    <url>/2020/11/28/pid%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>今天智能车培训听完綦佬讲解pid体验良好，决定做下记录，顺便自己也正儿八经写篇关于pid的笔记。</p>
-<a id="more"></a>
-
-<h4 id="一、PID基础"><a href="#一、PID基础" class="headerlink" title="一、PID基础"></a>一、PID基础</h4><p><strong>1.1 控制系统的框图</strong></p>
-<ul>
-<li>执行器</li>
-<li>传感器</li>
-<li>控制器<br><img src="/2020/11/28/pid%E7%AC%94%E8%AE%B0/1.png" alt="控制系统的框图"></li>
-</ul>
-<p><strong>1.2 控制器的设计</strong></p>
-<p><strong><em>1.2.1 on-off控制</em></strong></p>
-<p>&emsp;&emsp;比如我们举个烧水壶加热到60℃的例子，仅仅控制电热丝的通断可实现on-off控制，即当温度小于60℃时通，大于60℃时断，这样便可实现简单的控制。<br>&emsp;&emsp;这样的设计虽然简单但是这样存在一定的缺陷：频繁开关会损伤执行器的寿命。</p>
-<p><strong><em>1.2.2 带死区的on-off控制</em></strong></p>
-<p>&emsp;&emsp;即在1.2.1的基础上，假如并不需要控制水温60℃，而是存在一定的死区，如50℃-70℃都可以，则此时温度小于50℃时通，大于70℃时断。<br>&emsp;&emsp;这样减少了开关通断的频率从而提高了使用寿命。</p>
-<p><strong><em>1.2.3 相对连续的控制器–P控制(Proportion)</em></strong></p>
-<p>&emsp;&emsp;看了上述的两种控制器，我们不由得思考是否存在一种控制器能同时相对精准的控制温度，同时又能减少开关的频繁通断。<br>&emsp;&emsp;由此我们引出了相对连续的控制器。与之相应的也应该有相对连续的传感器。</p>
-<p>&emsp;&emsp;我们记当前值$Z$与预期值$X$的偏差为$error$，即$$error=X-Z$$</p>
-<p>于是输出值$out=K_c*error$ ，其中$K_c$为比例系数</p>
-<p>当$error$减小时，$out$也随之减小</p>
-<p>通过error值我们便可以用占空比来得到相对连续的控制量。</p>
-<p>那么这样是否存在问题呢？<br>&emsp;&emsp;我们可以看到当Z与X相等时，error值则为0，即停止输出，当Z小于X时再输出。从一个长的时间跨度来看输出的平均值便小于了预期值，即存在稳态误差。<br>&emsp;&emsp;另外，我们还要注意$K_c$值不能设的太大，否则一个很小的误差便会引起系统很大的改变，于是误差便会越来越大(发散系统)。</p>
-<p><strong><em>1.2.4 P-I控制 (比例-积分) (Proportion-Integration)</em></strong></p>
-<p>为减小稳态误差，我们引入了积分量<br>$$out=K_c(e(t)+\frac{1}{T_i}\int e(t)dt)$$<br>其中$\frac{1}{T_i}$为积分时间常数，$\frac{1}{T_i}\int e(t)dt$为耗散<br>这样又是否已经可以很好的控制系统了呢？<br>我们思考这样两种情况：<br><img src="/2020/11/28/pid%E7%AC%94%E8%AE%B0/2.png" alt="D的引入"></p>
-<p>可以看到左图的当前值是趋向于预期值的，而右图的当前值是远离期望值的，对于P-I控制来说他们输出的out值却是一样的，对于这样的情况这样的控制策略显然并不好。</p>
-<p><strong><em>1.2.4 P-I-D控制 (比例-积分-微分) (Proportion-Integration-Derivation)</em></strong></p>
-<p>于是我们引入微分项<br>$$out=K_c\Big(e(t)+\frac{1}{T_i}\int e(t)dt+T_d\frac{de(t)}{dt}\Big)$$<br>这里当$K_c$变化时，PID三项均会变化，于是我们引入一种更实用的写法<br>$$out=K_pe(t)+K_i\int e(t)dt+K_d\frac{de(t)}{dt}$$<br>只需改变$K_p$、$K_i$、$K_d$即可分别控制PID三项</p>
-<h4 id="二、PID调参"><a href="#二、PID调参" class="headerlink" title="二、PID调参"></a>二、PID调参</h4><h4 id="三、PID理论证明"><a href="#三、PID理论证明" class="headerlink" title="三、PID理论证明"></a>三、PID理论证明</h4><h4 id="四、待定"><a href="#四、待定" class="headerlink" title="四、待定"></a>四、待定</h4><p><strong>咕咕咕咕咕咕咕咕</strong></p>
-]]></content>
-      <categories>
-        <category>智能车</category>
-      </categories>
-      <tags>
-        <tag>pid</tag>
-        <tag>智能车</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于hexo的一些问题</title>
-    <url>/2020/05/28/%E5%85%B3%E4%BA%8Ehexo%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>在使用hexo时的一些陷阱</p>
-<blockquote>
-<p>[我]的文章<br>{ 和 #不能连着用，生成hexo时会报错，可在之间加个空格解决</p>
-</blockquote>
-<a id="more"></a>
-
-<p>命令</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new </span><br><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo server</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>在文章中使用<code>&lt;!--more--&gt;</code>可手动截断</p>
-]]></content>
-      <categories>
-        <category>问题</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -639,6 +626,27 @@
       </categories>
       <tags>
         <tag>技能</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于hexo的一些问题</title>
+    <url>/2020/05/28/%E5%85%B3%E4%BA%8Ehexo%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>在使用hexo时的一些陷阱</p>
+<blockquote>
+<p>[我]的文章<br>{ 和 #不能连着用，生成hexo时会报错，可在之间加个空格解决</p>
+</blockquote>
+<a id="more"></a>
+
+<p>命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new </span><br><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo server</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>在文章中使用<code>&lt;!--more--&gt;</code>可手动截断</p>
+]]></content>
+      <categories>
+        <category>问题</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
 </search>
