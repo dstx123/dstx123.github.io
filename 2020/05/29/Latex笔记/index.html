@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="[TOC] 零、关于Latex、Mathjax、Talex LaTeX是一种基于ΤΕΧ的排版系统，由美国计算机学家莱斯利·兰伯特（Leslie Lamport）在20世纪80年代初期开发，利用这种格式，即使使用者没有排版和程序设计的知识也可以充分发挥由TeX所提供的强大功能，能在几天，甚至几小时内生成很多具有书籍质量的印刷品。对于生成复杂表格和数学公式，这一点表现得尤为突出。因此它非常适用于生成高">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Latex笔记">
+<meta property="og:url" content="http://yoursite.com/2020/05/29/Latex%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Hinsky&#39;s Blog">
+<meta property="og:description" content="[TOC] 零、关于Latex、Mathjax、Talex LaTeX是一种基于ΤΕΧ的排版系统，由美国计算机学家莱斯利·兰伯特（Leslie Lamport）在20世纪80年代初期开发，利用这种格式，即使使用者没有排版和程序设计的知识也可以充分发挥由TeX所提供的强大功能，能在几天，甚至几小时内生成很多具有书籍质量的印刷品。对于生成复杂表格和数学公式，这一点表现得尤为突出。因此它非常适用于生成高">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-29T03:40:16.000Z">
+<meta property="article:modified_time" content="2020-06-12T13:53:08.000Z">
+<meta property="article:author" content="Hinsky">
+<meta property="article:tag" content="markdown">
+<meta property="article:tag" content="Latex">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/05/29/Latex%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Latex笔记 | Hinsky's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hinsky's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Welcome!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/29/Latex%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Hinsky">
+      <meta itemprop="description" content="凛冬散尽，星河长明。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hinsky's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Latex笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-29 11:40:16" itemprop="dateCreated datePublished" datetime="2020-05-29T11:40:16+08:00">2020-05-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-12 21:53:08" itemprop="dateModified" datetime="2020-06-12T21:53:08+08:00">2020-06-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/markdown/" itemprop="url" rel="index"><span itemprop="name">markdown</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>[TOC]</p>
+<h3 id="零、关于Latex、Mathjax、Talex"><a href="#零、关于Latex、Mathjax、Talex" class="headerlink" title="零、关于Latex、Mathjax、Talex"></a>零、关于Latex、Mathjax、Talex</h3><ul>
+<li><p>LaTeX是一种基于ΤΕΧ的排版系统，由美国计算机学家莱斯利·兰伯特（Leslie Lamport）在20世纪80年代初期开发，利用这种格式，即使使用者没有排版和程序设计的知识也可以充分发挥由TeX所提供的强大功能，能在几天，甚至几小时内生成很多具有书籍质量的印刷品。对于生成复杂表格和数学公式，这一点表现得尤为突出。因此它非常适用于生成高印刷质量的科技和数学类文档。</p>
+<span id="more"></span></li>
+<li><p>MathJax是一个显示网络上数学公式的开源JavaScript引擎库，它可以在所有浏览器上面工作，其中就支持LaTeX，MathML和AsciiMath 符号，里面的数字会被MathJax使用JavaScript引擎解析成HTML，SVG或者是MathML 方程式，然后在现代的浏览器里面显示。 它的设计目标是利用最新的web技术，构建一个支持math的web平台。支持主要的浏览器和操作系统,包括那些移动设备</p>
+</li>
+<li><p>Talex也是一个web数学公式渲染器。可惜hexo对Talex的支持似乎并不很友好。<br>Talex优点如下：<br>快速：并发渲染，无需重排页面。根据这个测试，性能绝对秒杀MathJax。<br>渲染效果好：采用TeX语法，渲染效果达到印刷出版级别。<br>无依赖：不依赖其它库。<br>支持服务器端渲染：例如，服务器端的Node.js程序调用KaTeX，把渲染好的HTML片段直接发送给客户端。</p>
+</li>
+</ul>
+<hr>
+<p><em>下面介绍KaTex&#x2F;LaTex用法</em></p>
+<h3 id="一、基本操作"><a href="#一、基本操作" class="headerlink" title="一、基本操作"></a>一、基本操作</h3><h4 id="插入公式"><a href="#插入公式" class="headerlink" title="插入公式"></a>插入公式</h4><ul>
+<li><strong>行中公式</strong><br><code>$在这中间加公式$</code><br>效果：$hello world$</li>
+<li><strong>独立公式</strong><br><code>$$在这中间加公式$$</code><br>效果：$$hello world$$</li>
+</ul>
+<h4 id="的使用"><a href="#的使用" class="headerlink" title="{}的使用"></a>{}的使用</h4><ul>
+<li><code>$&#123;xyx&#125;^&#123;1+2+3&#125;$</code><br>效果：${xyx}^{1+2+3}$<br>只有一个字符时可不写{}</li>
+<li><code>**\text&#123;&#125;</code>可用来划出一个文字区域，然后用<code>\operatorname&#123;&#125;</code>产生公式操作**<br>如：<code>$\operatorname&#123;Asin&#125;\text&#123; (ωx+μ) &#125;$</code><br>效果：$\operatorname{Asin}\text{ (ωx+μ) }$<br>而在\text{}中还可以再插入别的公式<br>如: <code>$$f(n)=n^n \quad \text&#123;n$\in N^\ast$&#125;$$</code><br>效果：$$f(n)&#x3D;n^n \quad \text{n$\in N^\ast$}$$</li>
+</ul>
+<h3 id="二、“花里胡哨”的操作"><a href="#二、“花里胡哨”的操作" class="headerlink" title="二、“花里胡哨”的操作"></a>二、“花里胡哨”的操作</h3><h4 id="1-上下标"><a href="#1-上下标" class="headerlink" title="1. 上下标"></a>1. 上下标</h4><p><code>^</code>表示上标，<code>_</code>表示下标</p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>$C^&#123;2^2&#125;_&#123;n+1&#125;$</code></td>
+<td>$C^{2^2}_{n+1}$</td>
+</tr>
+<tr>
+<td><code>$x^&#123;2^2_2&#125;_2$</code></td>
+<td>$x^{2^2_2}_2$</td>
+</tr>
+<tr>
+<td><code>$&#123;^1_2&#125;\bigotimes &#123;^3_4&#125;$</code></td>
+<td>${^1_2}\bigotimes {^3_4}$</td>
+</tr>
+<tr>
+<td><code>$^&#123;18&#125; _8 O ^&#123;-2&#125; _2$</code></td>
+<td>$^{18} _8 O ^{-2} _2$</td>
+</tr>
+</tbody></table>
+<h4 id="2-字符变大变小"><a href="#2-字符变大变小" class="headerlink" title="2. 字符变大变小"></a>2. 字符变大变小</h4><p>在符号前插入<code>\large</code>或<code>\small</code>命令即可</p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>$\tiny x$</code></td>
+<td>$\tiny x$</td>
+</tr>
+<tr>
+<td><code>$\scriptsize x$</code></td>
+<td>$\scriptsize x$</td>
+</tr>
+<tr>
+<td><code>$\footnotesize x$</code></td>
+<td>$\footnotesize x$</td>
+</tr>
+<tr>
+<td><code>$\small x$</code></td>
+<td>$\small x$</td>
+</tr>
+<tr>
+<td><code>$\normalsize x$</code></td>
+<td>$\normalsize x$</td>
+</tr>
+<tr>
+<td><code>$x$</code></td>
+<td>$x$</td>
+</tr>
+<tr>
+<td><code>$\large x$</code></td>
+<td>$\large x$</td>
+</tr>
+<tr>
+<td><code>$\Large x$</code></td>
+<td>$\Large x$</td>
+</tr>
+<tr>
+<td><code>$\LARGE x$</code></td>
+<td>$\LARGE x$</td>
+</tr>
+<tr>
+<td><code>$\huge x$</code></td>
+<td>$\huge x$</td>
+</tr>
+<tr>
+<td><code>$\Huge x$</code></td>
+<td>$\Huge x$</td>
+</tr>
+<tr>
+<td><code>$\small\ &#123;aa&#125;a \large &#123;a&#125;aa$</code></td>
+<td>$\small\ {aa}a \large {a}aa$</td>
+</tr>
+<tr>
+<td><code>$\boldsymbol&#123;\alpha 12bcEF&#125;12bcEF$</code></td>
+<td>$\boldsymbol{\alpha 12bcEF}12bcEF$</td>
+</tr>
+</tbody></table>
+<h4 id="3-字体"><a href="#3-字体" class="headerlink" title="3. 字体"></a>3. 字体</h4><table>
+<thead>
+<tr>
+<th>代码</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>$\rm &#123;罗马体abc123&#125;$</code></td>
+<td>$\rm {罗马体abc123}$</td>
+</tr>
+<tr>
+<td><code>$it &#123;意大利斜体abcde 123&#125;$</code></td>
+<td>$\it {意大利斜体abc123}$</td>
+</tr>
+<tr>
+<td><code>$\bf &#123;粗体abc123&#125;$</code></td>
+<td>$\bf {粗体abc123}$</td>
+</tr>
+<tr>
+<td><code>$\sf &#123;等线体abc123&#125;$</code></td>
+<td>$\sf {等线体abc123}$</td>
+</tr>
+<tr>
+<td><code>$\tt &#123;打印体abc123&#125;$</code></td>
+<td>$\tt {打印体abc123}$</td>
+</tr>
+<tr>
+<td><code>$\frak &#123;旧德式字体abc123&#125;$</code></td>
+<td>$\frak {旧德式字体abc123}$</td>
+</tr>
+<tr>
+<td><code>$Bbb &#123;黑板粗体abc123&#125;$</code></td>
+<td>$Bbb {黑板粗体abc123}$</td>
+</tr>
+<tr>
+<td><code>$\mathcal &#123;手写体abc123&#125;$</code></td>
+<td>$\mathcal {手写体abc123}$</td>
+</tr>
+<tr>
+<td><code>$\bold &#123;abc123&#125;$</code></td>
+<td>$\bold {abc123}$</td>
+</tr>
+<tr>
+<td><code>$\bm &#123;abc123&#125;$</code></td>
+<td>$\bm {abc123}$</td>
+</tr>
+<tr>
+<td><code>$\mathscr &#123;abc123&#125;$</code></td>
+<td>$\mathscr {abc123}$</td>
+</tr>
+</tbody></table>
+<h4 id="4-输入换行和空格"><a href="#4-输入换行和空格" class="headerlink" title="4. 输入换行和空格"></a>4. 输入换行和空格</h4><table>
+<thead>
+<tr>
+<th>代码</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>$用\space或~或 \ 来空格$</code></td>
+<td>$用\space或~或 \ 来空格$</td>
+</tr>
+<tr>
+<td><code>$用\newline或者 \\ 来换行$</code></td>
+<td>$用\newline或者 \ 来换行$</td>
+</tr>
+</tbody></table>
+<h4 id="5-输入括号和分隔符"><a href="#5-输入括号和分隔符" class="headerlink" title="5.输入括号和分隔符"></a>5.输入括号和分隔符</h4><table>
+<thead>
+<tr>
+<th>代码</th>
+<th>效果</th>
+<th>代码</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>$\lfloor &#123;a&#125; \rfloor$</code></td>
+<td>$\lfloor {a} \rfloor$</td>
+<td><code>$\lceil &#123;b&#125; \rceil$</code></td>
+<td>$\lceil {b} \rceil$</td>
+</tr>
+<tr>
+<td><code>$\lbrace &#123;c&#125; \rbrace$</code></td>
+<td>$\lbrace {c} \rbrace$</td>
+<td><code>$\&#123; &#123;d&#125; \&#125;$</code></td>
+<td>${ {d} }$</td>
+</tr>
+<tr>
+<td><code>$\langle &#123;e&#125; \rangle$</code></td>
+<td>$\langle {e} \rangle$</td>
+<td><code>$\left( &#123;f&#125; \right)$</code></td>
+<td>$\left( {f} \right)$</td>
+</tr>
+<tr>
+<td><code>$\left[ &#123;g&#125; \right]$</code></td>
+<td>$\left[ {g} \right]$</td>
+<td><code>$\langle &#123;h&#125; \rangle$</code></td>
+<td>$\langle {h} \rangle$</td>
+</tr>
+<tr>
+<td><code>$/ &#123;i&#125; \backslash$</code></td>
+<td>$&#x2F; {i} \backslash$</td>
+<td><code>$\lmoustache &#123;j&#125; \rmoustache$</code></td>
+<td>$\lmoustache {j} \rmoustache$</td>
+</tr>
+<tr>
+<td><code>$\ulcorner &#123;k&#125; \urcorner$</code></td>
+<td>$\ulcorner {k} \urcorner$</td>
+<td><code>$\llcorner &#123;l&#125; \lrcorner$</code></td>
+<td>$\llcorner {l} \lrcorner$</td>
+</tr>
+<tr>
+<td><code>$\vert &#123;m&#125; \vert$</code></td>
+<td>$\vert {m} \vert$</td>
+<td><code>$\Vert &#123;n&#125; \Vert$</code></td>
+<td>$\Vert {n} \Vert$</td>
+</tr>
+<tr>
+<td><code>$\lgroup &#123;o&#125; \rgroup$</code></td>
+<td>$\lgroup {o} \rgroup$</td>
+<td><code>$\lt &#123;p&#125; \gt$</code></td>
+<td>$\lt {p} \gt$</td>
+</tr>
+<tr>
+<td><code>$\lang &#123;q&#125; \rang$</code></td>
+<td>$\lang {q} \rang$</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><code>$| \frac&#123;a&#125;&#123;b&#125; |$</code><br>效果：$| \frac{a}{b} |$<br><code>$\| \frac&#123;a&#125;&#123;b&#125; \|$</code><br>效果：$| \frac{a}{b} |$</p>
+<p>此外，可用<code>\big \Big \bigg \Bigg</code>控制括号大小，比如</p>
+<figure class="highlight latex"><figcaption><span>&#123;.line-numbers&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br><span class="line"><span class="keyword">\Bigg</span> ( </span><br><span class="line">	<span class="keyword">\bigg</span> [ </span><br><span class="line">		<span class="keyword">\Big</span> <span class="keyword">\&#123;</span> </span><br><span class="line">			<span class="keyword">\big</span> <span class="keyword">\langle</span> </span><br><span class="line">				<span class="keyword">\|</span> </span><br><span class="line">					<span class="keyword">\frac</span>&#123;a&#125;&#123;b&#125; </span><br><span class="line">				<span class="keyword">\|</span> </span><br><span class="line">			<span class="keyword">\big</span> <span class="keyword">\rangle</span></span><br><span class="line">		<span class="keyword">\Big</span> <span class="keyword">\&#125;</span></span><br><span class="line">	<span class="keyword">\bigg</span> ] </span><br><span class="line"><span class="keyword">\Bigg</span> )</span><br><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br></pre></td></tr></table></figure>
+<p>得到：<br>$$<br>\Bigg (<br>    \bigg [<br>        \Big {<br>            \big \langle<br>                |<br>                    \frac{a}{b}<br>                |<br>            \big \rangle<br>        \Big }<br>    \bigg ]<br>\Bigg )<br>$$<br>用前面2.的方法也可<br>另外，当要在不同行显示对应括号时，可以在每一行对应处使用 \left. 或 \right. 来放一个”影子”括号：<code>$$a = \left(1 + 2 + 3 + \cdots\right. \\ \left. n - 2 + n - 1 + n\right.)$$</code><br>得到：<br>$$a &#x3D; \left(1 + 2 + 3 + \cdots\right. \ \left. n - 2 + n - 1 + n\right.)$$<br>此外，\left(\right)等会自动匹配括号大小,如<br><code>$$\large a_\text&#123;向下&#125;=g+(\frac&#123;\frac&#123;G_&#123;总&#125;&#125;&#123;g&#125;&#125;&#123;\frac&#123;p_1&#125;&#123;v_1&#125;+m_2&#125;)$$</code><br><code>$$\large a_\text&#123;向下&#125;=g+\left(\frac&#123;\frac&#123;G_&#123;总&#125;&#125;&#123;g&#125;&#125;&#123;\frac&#123;p_1&#125;&#123;v_1&#125;+m_2&#125;\right)$$</code><br>效果：$$\large a_\text{向下}&#x3D;g+(\frac{\frac{G_{总}}{g}}{\frac{p_1}{v_1}+m_2})$$<br>$$\large a_\text{向下}&#x3D;g+\left(\frac{\frac{G_{总}}{g}}{\frac{p_1}{v_1}+m_2}\right)$$</p>
+<p>若要将行内显示的分隔符也变大，可使用\middle命令(必须用\left. \right.),如：<br><code>$        a          | \frac&#123;b&#125;&#123;c&#125; $</code><br><code>$\left. a \middle \| \frac&#123;b&#125;&#123;c&#125; \right.$</code><br>效果：<br>$        a          | \frac{b}{c} $<br>$\left. a \middle | \frac{b}{c} \right.$</p>
+<p>另一类比较不同的括号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$\tbinom&#123;n&#125;&#123;k&#125;$</span><br><span class="line">$\binom&#123;n&#125;&#123;k&#125;$</span><br><span class="line">$\dbinom&#123;n&#125;&#123;k&#125;$</span><br><span class="line">$&#123;n\brace k&#125;$</span><br><span class="line">$&#123;n\choose k&#125;$</span><br><span class="line">$&#123;n\brack k&#125;$</span><br></pre></td></tr></table></figure>
+<p>对应效果<br>$\tbinom{n}{k}$</p>
+<p>$\binom{n}{k}$</p>
+<p>$\dbinom{n}{k}$</p>
+<p>${n\brace k}$</p>
+<p>${n\choose k}$</p>
+<p>${n\brack k}$</p>
+<h4 id="6-上下标"><a href="#6-上下标" class="headerlink" title="6.上下标"></a>6.上下标</h4>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/markdown/" rel="tag"># markdown</a>
+              <a href="/tags/Latex/" rel="tag"># Latex</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/28/%E5%85%B3%E4%BA%8Ehexo%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" rel="prev" title="关于hexo的一些问题">
+      <i class="fa fa-chevron-left"></i> 关于hexo的一些问题
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/29/next%E4%B8%ADkatex%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/" rel="next" title="next中katex不显示的问题">
+      next中katex不显示的问题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%B6%E3%80%81%E5%85%B3%E4%BA%8ELatex%E3%80%81Mathjax%E3%80%81Talex"><span class="nav-number">1.</span> <span class="nav-text">零、关于Latex、Mathjax、Talex</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">一、基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E5%85%AC%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">插入公式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">{}的使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E2%80%9C%E8%8A%B1%E9%87%8C%E8%83%A1%E5%93%A8%E2%80%9D%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">二、“花里胡哨”的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%B8%8A%E4%B8%8B%E6%A0%87"><span class="nav-number">3.1.</span> <span class="nav-text">1. 上下标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%AD%97%E7%AC%A6%E5%8F%98%E5%A4%A7%E5%8F%98%E5%B0%8F"><span class="nav-number">3.2.</span> <span class="nav-text">2. 字符变大变小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%AD%97%E4%BD%93"><span class="nav-number">3.3.</span> <span class="nav-text">3. 字体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E8%BE%93%E5%85%A5%E6%8D%A2%E8%A1%8C%E5%92%8C%E7%A9%BA%E6%A0%BC"><span class="nav-number">3.4.</span> <span class="nav-text">4. 输入换行和空格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E8%BE%93%E5%85%A5%E6%8B%AC%E5%8F%B7%E5%92%8C%E5%88%86%E9%9A%94%E7%AC%A6"><span class="nav-number">3.5.</span> <span class="nav-text">5.输入括号和分隔符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E4%B8%8A%E4%B8%8B%E6%A0%87"><span class="nav-number">3.6.</span> <span class="nav-text">6.上下标</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hinsky"
+      src="/images/header.jpg">
+  <p class="site-author-name" itemprop="name">Hinsky</p>
+  <div class="site-description" itemprop="description">凛冬散尽，星河长明。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/dstx123" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;dstx123" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=1026255442&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;1026255442&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-qq fa-fw"></i>QQ</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hinsky</span>
+</div>
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("10/01/2019 00:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
